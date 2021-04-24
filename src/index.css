@@ -1,0 +1,219 @@
+*,
+*::after,
+*::before  {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family:"Lato", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+  box-sizing: border-box;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  justify-content: center;
+}
+
+.align-center{
+  align-items: center;
+}
+
+.space-around{
+  justify-content: space-around;
+}
+
+.space-between {
+  justify-content: space-between
+}
+
+.end {
+  align-items: end;
+}
+
+.opacity {
+  opacity: 0.7;
+}
+
+.layout{
+  background: #41b3a3;
+  width: 100%;
+  height: 6rem;
+}
+
+li.nav-item{
+  padding: 0;
+  background-color: lightblue;
+  margin: .5rem;
+  font-size: 3rem;
+}
+
+.timerlist {
+  width: 100%;
+  height: 100%;
+  padding-top: 1.5rem;
+  background: #c38d9e
+}
+
+.add-btn {
+  background-color: #DEEDFE;
+  border: none;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  font-size: 30px;
+  text-align: center;
+  text-decoration: none;
+  outline:none;
+  width: 15rem;
+  height: 15rem;
+}
+
+.page-mask{
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.form{
+  position: relative;
+  width: 90%;
+  height: 85%;
+  border-radius: 25px;
+  background-color: #DEEDFE;
+}
+
+.form-outer{
+  width: 50%;
+  height: 50%;
+  position: fixed;
+  width: 60%;
+  height: 60%;
+  left: 20%;
+  right: 20%;
+  bottom: 20%;
+  top: 20%;
+  border-radius: 25px;
+  background-color: #5aa3d9;
+}
+
+.form-input{
+  width: 30%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.cancel-form{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: transparent;
+  border:none;
+  outline:none;
+}
+
+.timer-container {
+  height: 34rem;
+  width: 40rem;
+  background-image: linear-gradient(to bottom right, #85dcb8, #41b3a3);
+  border-radius: 25px;
+  opacity: 0.9;
+  margin: 6px 10px 10px 10px;
+  transition: 0.5s ease;
+}
+
+.labels{
+  padding-left: 30px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.editable-btn {
+  background-color: transparent;
+  border:none;
+  outline: none;
+  visibility: hidden;
+}
+
+.delete-btn-container{
+  position: absolute;
+  right: 0;
+  top: 0;
+ }
+
+ .delete-timer-btn{
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  text-decoration: none;
+  outline:none;
+  visibility: hidden;
+  padding-top: .2rem;
+  margin-right: .7rem;
+  margin-top: .5rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+.time-btn{
+  background-color: #3493d9;
+  border: none;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  margin-right: .5rem;
+  font-size: 3rem;
+  text-align: center;
+  text-decoration: none;
+  outline:none;
+  width: 4rem;
+  height: 4rem;
+}
+
+.timer-container:hover .delete-timer-btn{
+  visibility: visible;
+}
+
+.timer-container:hover {
+  transform: scale(1.04);
+}
+
+.label-container:hover .editable-btn{
+  visibility: visible;
+}
