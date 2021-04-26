@@ -27,6 +27,10 @@ const Layout = () => {
         }
     }
 
+    const updateProfile = () => {
+        history.push("/update-profile");
+    }
+
     return (
         <div className="layout column">
             <nav>
@@ -35,6 +39,7 @@ const Layout = () => {
                     <li className="nav-item" onClick={analytics}>Analytics</li>
                     <li className="nav-item"> Current User: {currentUser.email} </li>
                     <li className="nav-item" onClick={handleLogout}> LogOut</li>
+                    <li className="nav-item" onClick={updateProfile}> Update Profile</li>
                 </ul>
             </nav>
         </div>

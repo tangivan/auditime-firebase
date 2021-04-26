@@ -7,6 +7,8 @@ import SignUp from './components/Signup';
 import Login from './components/Login';
 import AuthProvider from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import ForgotPassword from './components/ForgotPassword';
+import UpdateProfile from './components/UpdateProfile';
 
 function App() {
   return (
@@ -18,12 +20,16 @@ function App() {
               <Layout />
               <TimerList />
             </PrivateRoute>
-            <PrivateRoute exact path="/analytics">
+            <PrivateRoute path="/analytics">
               <Layout />
               <Analytics />
             </PrivateRoute>
+            <PrivateRoute path="/update-profile">
+              <UpdateProfile />
+            </PrivateRoute>
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
+            <Route path="/forgot-password" component={ForgotPassword} />
           </Switch>
         </AuthProvider>
       </Router>
