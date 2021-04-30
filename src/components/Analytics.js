@@ -1,10 +1,11 @@
 import React from 'react';
+import TimerData from './TimerData';
 
 const Analytics = () => {
 
     return (
-        <div className="test">
-            <h1>Analytics Page</h1>
+        <div className="analyticsContainer">
+            <TimerData />
         </div>
     );
 }

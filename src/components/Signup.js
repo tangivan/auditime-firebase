@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useAuth } from '../contexts/AuthContext'
+import firebase from '../firebase'
 import { Link, useHistory } from 'react-router-dom'
 
 const SignUp = () => {
@@ -21,9 +22,22 @@ const SignUp = () => {
         try {
             setError("");
             setLoading(true);
-            await signup(emailRef.current.value, passwordRef.current.value);
-            history.push("/");
-        } catch {
+            await signup(emailRef.current.value, passwordRef.current.value).then(cred => {
+                return firebase.firestore().collection('users').doc(cred.user.uid).collection('timers').add({
+                    name: "Default Timer",
+                    timeShown: 0,
+                    timeRunTotal: 0,
+                    timerHistory: [{
+                        events: 'created',
+                        duration: 0,
+                        timeStamp: Date.now()
+                    }],
+                })
+            }).then(() => {
+                history.push("/");
+            })
+        } catch (error) {
+            console.log(error);
             setError("Failed to create an account");
         }
 

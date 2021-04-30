@@ -4,8 +4,12 @@ import { MdCancel, MdModeEdit } from "react-icons/md";
 import Timer from './Timer';
 import TimerForm from './TimerForm';
 import firebase from '../firebase'
+import { useAuth } from '../contexts/AuthContext'
 
 const TimerController = ({ timer }) => {
+
+    const { getUuid } = useAuth();
+
     const [timerSettings, setTimerSettings] = useState({
         timerOn: false,
         timerStart: 0,
@@ -75,7 +79,7 @@ const TimerController = ({ timer }) => {
             duration: timerSettings.timerTime,
             timeStamp: Date.now()
         }]
-        firebase.firestore().collection('timers').doc(timer.id).update({ timerHistory: newHistory });
+        firebase.firestore().collection('users').doc(getUuid()).collection('timers').doc(timer.id).update({ timerHistory: newHistory });
     }
 
     const handlePause = () => {
@@ -92,7 +96,7 @@ const TimerController = ({ timer }) => {
 
         const newTimeRunTotal = timer.timeRunTotal === timer.timeShown ? timerSettings.timerTime : (timer.timeRunTotal + timerSettings.timerTime);
 
-        firebase.firestore().collection('timers').doc(timer.id).update({ timeShown: timerSettings.timerTime, timeRunTotal: newTimeRunTotal, timerHistory: newHistory });
+        firebase.firestore().collection('users').doc(getUuid()).collection('timers').doc(timer.id).update({ timeShown: timerSettings.timerTime, timeRunTotal: newTimeRunTotal, timerHistory: newHistory });
     }
 
     const handleReset = () => {
@@ -107,12 +111,12 @@ const TimerController = ({ timer }) => {
             events: 'reset',
             timeStamp: Date.now()
         }]
-        firebase.firestore().collection('timers').doc(timer.id).update({ timeShown: 0, timerHistory: newHistory });
+        firebase.firestore().collection('users').doc(getUuid()).collection('timers').doc(timer.id).update({ timeShown: 0, timerHistory: newHistory });
 
     }
 
     const handleRemoveTimer = () => {
-        firebase.firestore().collection('timers').doc(timer.id).delete().
+        firebase.firestore().collection('users').doc(getUuid()).collection('timers').doc(timer.id).delete().
             then(() => {
                 console.log("Document successfully deleted!");
             }).catch((error) => {

@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import { MdCancel } from "react-icons/md";
 import firebase from '../firebase'
 import { v4 as uuidv4 } from 'uuid';
+import { useAuth } from '../contexts/AuthContext'
 
 const TimerForm = ({ handleToggleClick, timer }) => {
     const [name, setName] = useState('');
+    const { getUuid } = useAuth();
     let create = true;
     const handleSubmit = (e) => {
         e.preventDefault();
-        !timer ? firebase.firestore().collection('timers').add({
+        console.log(getUuid());
+        !timer ? firebase.firestore().collection('users').doc(getUuid()).collection('timers').add({
             name,
             timeShown: 0,
             timeRunTotal: 0,
