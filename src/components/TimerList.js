@@ -27,12 +27,12 @@ const TimerList = () => {
 
     return (
         <div className="timerlist column">
-            <ul className="row">
+            <ul className="row timerGrid">
                 {timerList.map(timer => {
                     return (<TimerController timer={timer} key={timer.id} />)
                 })}
+                <ToggleableTimerForm />
             </ul>
-            <ToggleableTimerForm />
         </div>
     );
 }

@@ -128,7 +128,7 @@ const TimerController = ({ timer }) => {
         editTimer ? setEditTimer(false) : setEditTimer(true);
     }
     return (
-        <div className="timer-container column align-center">
+        <div className="timer-container column align-center hover-scale">
             {editTimer && (<TimerForm handleToggleClick={handleEditTimer} timer={timer} />)}
             <div className="label-container">
                 <label className='labels'>{timer.name}</label>

@@ -9,8 +9,8 @@ const ToggleableTimerForm = () => {
         toggleForm ? setToggleForm(false) : setToggleForm(true);
     }
     return (
-        <div>
-            <button className="add-btn"
+        <div className="row center align-center">
+            <button className="add-btn hover-scale"
                 onClick={handleToggleClick}
             >
                 <IoIosAddCircleOutline size={70} color="#99cff7" />
