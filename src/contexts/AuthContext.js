@@ -35,6 +35,12 @@ const AuthProvider = ({ children }) => {
         return currentUser.updatePassword(password);
     }
 
+    const updateName = (user, fname, lname) => {
+        return user.updateProfile({
+            displayName: fname + ' ' + lname
+        }).then(console.log("succeed"));
+    }
+
     const getUuid = () => {
         return currentUser.uid;
     }
@@ -56,7 +62,8 @@ const AuthProvider = ({ children }) => {
         resetPassword,
         updateEmail,
         updatePassword,
-        getUuid
+        getUuid,
+        updateName
     }
     return (
         <AuthContext.Provider value={value}>

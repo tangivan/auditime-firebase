@@ -81,6 +81,7 @@ th, td{
 
 .align-center{
   align-items: center;
+  padding: 0;
 }
 
 .space-around{
@@ -99,6 +100,10 @@ th, td{
   opacity: 0.7;
 }
 
+.cursor{
+  cursor:pointer;
+}
+
 .layout{
   position: absolute;
   top: 0;
@@ -108,19 +113,36 @@ th, td{
   z-index: 100;
 }
 
-li.nav-item{
-  color: #ffff;
-  margin: .5rem;
-  font-size: 3rem;
-  height: 5rem;
-  padding-bottom: 5rem;
+.full-height {
+  height: 100%;
 }
 
+li.nav-item{
+  color: #ffff;
+  font-size: 3rem;
+  cursor:pointer;
+}
+
+.margin-sm {
+  margin: 0.5rem;
+}
+
+.margin-r-sm {
+  margin-right: 1rem;
+}
+
+.nav-item:hover {
+  box-shadow: inset 0 0 10rem 10rem rgba(255, 255, 255, 0.3);
+}
+
+
 .nav-item-active {
+  padding-top: .5rem;
   border-bottom: .5rem solid #fff;
 }
 
 .nav-item-inactive:hover {
+  padding-top: .5rem;
   border-bottom: .5rem solid #8860D0;
 }
 
@@ -128,6 +150,11 @@ li.nav-item{
   margin-left: 3rem;
   cursor: pointer;
   
+}
+
+.logo {
+  color: #ffff;
+  font-size: 3rem;
 }
 
 .timerlist {
@@ -320,18 +347,63 @@ li.nav-item{
 }
 
 .dropdown-btn {
+  height: 100%;
   cursor: pointer;
+  color: #ffff;
+  font-size: 3rem;
+  padding-left: 2rem;
+}
+
+.dropdown-btn:hover {
+  box-shadow: inset -9rem 0 0 0 rgba(255, 255, 255, 0.3);
+}
+
+.circle {
+  background-color: #ccc;
+  border-radius: 50%;
+  text-align: center;
+  height: 4rem;
+  width: 4rem;
+}
+.initials {
+  font-size: 2rem;
+  line-height: 2;
+  position: relative;
+  top: 1rem;  
+}
+
+.expand{
+  margin-top: 2rem;
+  margin-right: 1rem;
+  color:'#fefefe';
+}
+
+.expand-arrow-down {
+  transform: rotate(0deg);
+  transition: transform 0.1s linear;
+}
+.expand-arrow-up {
+  transform: rotate(180deg);
+  transition: transform 0.1s linear;
 }
 
 .dropdown {
-  position: relative;
+  position: absolute;
+  right: 0;
   display: inline-block;
+  height: 100%;
+  width: 
 }
 
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
+  position: relative;
+  background-color: #5AA3DD;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-profile{
+  background:#365fc7;
+  color: #ffff;
+  font-size: 3rem;
 }

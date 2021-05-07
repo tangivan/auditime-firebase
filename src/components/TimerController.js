@@ -132,14 +132,14 @@ const TimerController = ({ timer }) => {
             {editTimer && (<TimerForm handleToggleClick={handleEditTimer} timer={timer} />)}
             <div className="label-container">
                 <label className='labels'>{timer.name}</label>
-                <button className='editable-btn'
+                <button className='editable-btn cursor'
                     onClick={handleEditTimer}
                 >
                     <MdModeEdit size={20} color="#0755B5" />
                 </button>
             </div>
             <div className='delete-btn-container'>
-                <button className='column align-center delete-timer-btn'
+                <button className='column align-center delete-timer-btn cursor'
                     onClick={handleRemoveTimer}
                 >
                     <MdCancel color="#0755B5" size={30} />
@@ -150,16 +150,16 @@ const TimerController = ({ timer }) => {
 
             <div className='row end'>
                 {!timerSettings.timerOn &&
-                    (<button className='time-btn'
+                    (<button className='time-btn cursor'
                         onClick={handleStart}>
                         <FaPlay color='#DEEDFE' size={20} />
                     </button>)}
-                {timerSettings.timerOn && (<button className='time-btn'
+                {timerSettings.timerOn && (<button className='time-btn cursor'
                     onClick={handlePause}>
                     <FaPause color='#DEEDFE' size={20} />
                 </button>)}
 
-                <button className='time-btn' onClick={handleReset}>
+                <button className='time-btn cursor' onClick={handleReset}>
                     <FaStop color='#DEEDFE' size={20} />
                 </button>
             </div>

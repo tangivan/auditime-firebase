@@ -6,8 +6,10 @@ import { Link, useHistory } from 'react-router-dom'
 const SignUp = () => {
     const emailRef = useRef();
     const passwordRef = useRef();
+    const fnameRef = useRef();
+    const lnameRef = useRef();
     const passwordConfirmRef = useRef();
-    const { signup } = useAuth();
+    const { signup, updateName } = useAuth();
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory();
@@ -23,6 +25,8 @@ const SignUp = () => {
             setError("");
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value).then(cred => {
+                console.log(cred);
+                updateName(cred.user, fnameRef.current.value, lnameRef.current.value);
                 return firebase.firestore().collection('users').doc(cred.user.uid).collection('timers').add({
                     name: "Default Timer",
                     timeShown: 0,
@@ -33,15 +37,13 @@ const SignUp = () => {
                         timeStamp: Date.now()
                     }],
                 })
-            }).then(() => {
-                history.push("/");
             })
         } catch (error) {
             console.log(error);
             setError("Failed to create an account");
         }
-
         setLoading(false);
+        history.push('/');
     }
 
     return (
@@ -49,6 +51,10 @@ const SignUp = () => {
             <h1>Sign Up</h1>
             {error && <h1>{error}</h1>}
             <form onSubmit={handleSubmit}>
+                <label htmlFor="fname">First Name</label>
+                <input type="text" ref={fnameRef}></input>
+                <label htmlFor="lname">Last Name</label>
+                <input type="text" ref={lnameRef}></input>
                 <label>Email</label>
                 <input type="email" ref={emailRef}></input>
                 <label>Password</label>

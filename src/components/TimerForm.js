@@ -38,7 +38,7 @@ const TimerForm = ({ handleToggleClick, timer }) => {
                     </label>
                     <div className='form-input align-center'>
                         <input
-                            maxLength='16'
+                            maxLength='13'
                             type='text'
                             id='timerLabel'
                             className='input'
@@ -47,11 +47,11 @@ const TimerForm = ({ handleToggleClick, timer }) => {
                             onChange={(e) => setName(e.target.value)}
                             required />
                         <button
-                            className='button'
+                            className='button cursor'
                             type='submit'>
                             Submit
                          </button>
-                        <button className='cancel-form' onClick={handleToggleClick}>
+                        <button className='cancel-form cursor' onClick={handleToggleClick}>
                             <MdCancel color='#3493d9' size={55} />
                         </button>
                     </div>
