@@ -11,7 +11,7 @@ const CollapsibleTimerData = ({ timer }) => {
 
     return (
         <tbody>
-            {timer.timerHistory.map(timerHistoryData => {
+            {timer.timerHistory.slice(1).map(timerHistoryData => {
                 return (
                     <tr className="timerHistory" key={uuidv4()}>
                         <td>{timer.name}</td>

@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
-import firebase, { auth } from '../firebase'
+import firebase, { auth, googleProvider } from '../firebase'
 
-const AuthContext = React.createContext()
+
+const AuthContext = React.createContext();
 
 export const useAuth = () => {
     return useContext(AuthContext);
@@ -17,6 +18,21 @@ const AuthProvider = ({ children }) => {
 
     const login = (email, password) => {
         return auth.signInWithEmailAndPassword(email, password);
+    }
+
+    const anonLogin = () => {
+        return auth.signInAnonymously();
+    }
+
+    const linkWithGoogle = () => {
+        auth.currentUser.linkWithPopup(googleProvider)
+            .then((result) => {
+                const credential = result.credential;
+                const user = result.user;
+            })
+            .catch(error => {
+                console.error(error);
+            })
     }
 
     const logout = () => {
@@ -63,7 +79,9 @@ const AuthProvider = ({ children }) => {
         updateEmail,
         updatePassword,
         getUuid,
-        updateName
+        updateName,
+        anonLogin,
+        linkWithGoogle
     }
     return (
         <AuthContext.Provider value={value}>

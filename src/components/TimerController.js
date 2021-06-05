@@ -127,43 +127,46 @@ const TimerController = ({ timer }) => {
     const handleEditTimer = () => {
         editTimer ? setEditTimer(false) : setEditTimer(true);
     }
+
     return (
-        <div className="timer-container column align-center hover-scale">
+        <>
             {editTimer && (<TimerForm handleToggleClick={handleEditTimer} timer={timer} />)}
-            <div className="label-container">
-                <label className='labels'>{timer.name}</label>
-                <button className='editable-btn cursor'
-                    onClick={handleEditTimer}
-                >
-                    <MdModeEdit size={20} color="#0755B5" />
-                </button>
-            </div>
-            <div className='delete-btn-container'>
-                <button className='column align-center delete-timer-btn cursor'
-                    onClick={handleRemoveTimer}
-                >
-                    <MdCancel color="#0755B5" size={30} />
-                </button>
-            </div>
+            <div className="timer-container column align-center hover-scale">
+                <div className="label-container">
+                    <label className='labels'>{timer.name}</label>
+                    <button className='editable-btn cursor'
+                        onClick={handleEditTimer}
+                    >
+                        <MdModeEdit size={20} color="#0755B5" />
+                    </button>
+                </div>
+                <div className='delete-btn-container'>
+                    <button className='column align-center delete-timer-btn cursor'
+                        onClick={handleRemoveTimer}
+                    >
+                        <MdCancel color="#0755B5" size={30} />
+                    </button>
+                </div>
 
-            <Timer time={timeShown} />
+                <Timer time={timeShown} />
 
-            <div className='row end'>
-                {!timerSettings.timerOn &&
-                    (<button className='time-btn cursor'
-                        onClick={handleStart}>
-                        <FaPlay color='#DEEDFE' size={20} />
+                <div className='row end'>
+                    {!timerSettings.timerOn &&
+                        (<button className='time-btn cursor'
+                            onClick={handleStart}>
+                            <FaPlay color='#DEEDFE' size={20} />
+                        </button>)}
+                    {timerSettings.timerOn && (<button className='time-btn cursor'
+                        onClick={handlePause}>
+                        <FaPause color='#DEEDFE' size={20} />
                     </button>)}
-                {timerSettings.timerOn && (<button className='time-btn cursor'
-                    onClick={handlePause}>
-                    <FaPause color='#DEEDFE' size={20} />
-                </button>)}
 
-                <button className='time-btn cursor' onClick={handleReset}>
-                    <FaStop color='#DEEDFE' size={20} />
-                </button>
+                    <button className='time-btn cursor' onClick={handleReset}>
+                        <FaStop color='#DEEDFE' size={20} />
+                    </button>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

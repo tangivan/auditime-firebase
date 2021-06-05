@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
-import { IoIosTimer } from 'react-icons/io'
-import { MdExpandMore } from 'react-icons/md'
+import React, { useState, useEffect, useRef } from 'react';
+import OutsideClick from './OutsideClick';
+import { useHistory, useLocation } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import { IoIosTimer } from 'react-icons/io';
+import { MdExpandMore } from 'react-icons/md';
 
 const Navbar = () => {
     const history = useHistory();
     const location = useLocation();
-    const { currentUser, logout } = useAuth();
+    const { currentUser, logout, linkWithGoogle } = useAuth();
     const [error, setError] = useState("");
     const [dropdown, setDropdown] = useState(false);
     const [active, setActive] = useState(true);
 
+
     useEffect(() => {
         location.pathname === '/' ? setActive(true) : setActive(false);
+        console.log(currentUser);
     }, [location]);
 
-
+    useEffect(() => {
+        history.push("/");
+        console.log("changed");
+    }, [currentUser.isAnonymous]);
 
     const timers = () => {
         setDropdown(false);
@@ -32,9 +38,12 @@ const Navbar = () => {
         setDropdown(!dropdown);
     }
 
+    const handleOutsideToggle = () => {
+        setDropdown(false);
+    }
+
     const handleLogout = () => {
         setError('');
-
         try {
             logout()
             history.push('/login')
@@ -46,6 +55,20 @@ const Navbar = () => {
 
     const updateProfile = () => {
         history.push("/update-profile");
+    }
+
+    const linkAccount = () => {
+        setError('');
+        try {
+            linkWithGoogle();
+        } catch (error) {
+            setError('Failed to Link Account');
+            console.log(error);
+        }
+        finally {
+            setDropdown(false);
+            history.push('/');
+        }
     }
 
     return (
@@ -61,17 +84,20 @@ const Navbar = () => {
                             <li className={!active ? "full-height nav-item  nav-item-active row center align-center margin-r-sm" : "full-height nav-item  nav-item-inactive row center align-center margin-r-sm"} onClick={analytics}>Analytics</li>
                         </span>
                     </div>
-                    <div className="dropdown">
-                        <li className="dropdown-btn row end" onClick={handleToggle}>
-                            <span className="circle initials">{currentUser.displayName.split(" ").map((n) => n[0]).join('').toUpperCase()}</span>
-                            <MdExpandMore size={20} className={dropdown ? "expand expand-arrow-up" : "expand expand-arrow-down"} />
-                        </li>
-                        {dropdown && <div className="dropdown-content">
-                            <li className="dropdown-profile"><span className="margin-sm">{currentUser.displayName}</span></li>
-                            <li className="nav-item" onClick={updateProfile}><span className="margin-sm"> Update Profile</span></li>
-                            <li className="nav-item" onClick={handleLogout}><span className="margin-sm"> LogOut</span></li>
-                        </div>}
-                    </div>
+                    <OutsideClick action={handleOutsideToggle}>
+                        <div className="dropdown">
+                            <li className="dropdown-btn row end" onClick={handleToggle}>
+                                <span className="circle initials">{!currentUser.isAnonymous ? currentUser.providerData[0].displayName.split(" ").map((n) => n[0]).join('').toUpperCase() : "G"}</span>
+                                <MdExpandMore size={20} className={dropdown ? "expand expand-arrow-up" : "expand expand-arrow-down"} />
+                            </li>
+                            {dropdown && <div className="dropdown-content">
+                                <li className="dropdown-profile"><span className="margin-sm">{!currentUser.isAnonymous ? currentUser.providerData[0].displayName : "Guest"}</span></li>
+                                {!currentUser.isAnonymous ? <li className="nav-item" onClick={updateProfile}><span className="margin-sm"> Update Profile</span></li> :
+                                    <li className="nav-item" onClick={linkAccount}><span className="margin-sm"> Link Account</span></li>}
+                                <li className="nav-item" onClick={handleLogout}><span className="margin-sm"> LogOut</span></li>
+                            </div>}
+                        </div>
+                    </OutsideClick>
                 </ul>
             </nav >
         </div >

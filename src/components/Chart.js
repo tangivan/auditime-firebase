@@ -71,7 +71,6 @@ const Chart = () => {
                 }
             ]
         })
-        console.log(chartData);
     }, [timerList])
 
 
@@ -79,12 +78,12 @@ const Chart = () => {
 
     return (
         <div className='row center'>
-            <Doughnut
+            {/* <Doughnut
                 data={chartData}
                 width={650}
                 height={350}
                 options={{ maintainAspectRatio: false, responsive: false, legend: { display: true, position: 'bottom' } }}
-            />
+            /> */}
             <div>
                 <Bar
                     data={chartData}

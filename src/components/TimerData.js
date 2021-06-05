@@ -34,9 +34,9 @@ const TimerData = () => {
                         <th>Events</th>
                         <th>Date Started</th>
                         <th>Time Started</th>
-                        <th>Total Duration</th>
-                        <th>Event duration</th>
-                        <th>Current Time</th>
+                        <th>Total Time</th>
+                        <th>Session Time</th>
+                        <th>Time Shown</th>
                     </tr>
                 </tbody>
                 {timerList.map(timer => {

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { MdCancel } from "react-icons/md";
-import firebase from '../firebase'
+import firebase from '../firebase';
 import { v4 as uuidv4 } from 'uuid';
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext';
+import OutsideClick from './OutsideClick';
 
 const TimerForm = ({ handleToggleClick, timer }) => {
     const [name, setName] = useState('');
     const { getUuid } = useAuth();
-    let create = true;
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(getUuid());
@@ -22,42 +22,36 @@ const TimerForm = ({ handleToggleClick, timer }) => {
             }],
         })
             :
-            firebase.firestore().collection('timers').doc(timer.id).update({ name });
+            firebase.firestore().collection('users').doc(getUuid()).collection('timers').doc(timer.id).update({ name });
 
         setName('');
         handleToggleClick();
     }
 
     return (
-        <>
+        <div className="order">
             <div className='page-mask'></div>
-            <div className='form-outer column align-center center'>
-                <form className='form column align-center' onSubmit={handleSubmit}>
-                    <label htmlFor='timerLabel'>
-                        {!timer ? 'Create a Timer' : 'Edit Timer Name'}
-                    </label>
-                    <div className='form-input align-center'>
-                        <input
-                            maxLength='13'
-                            type='text'
-                            id='timerLabel'
-                            className='input'
-                            autoComplete='off'
-                            placeholder="Timer Name"
-                            onChange={(e) => setName(e.target.value)}
-                            required />
-                        <button
-                            className='button cursor'
-                            type='submit'>
-                            Submit
-                         </button>
-                        <button className='cancel-form cursor' onClick={handleToggleClick}>
-                            <MdCancel color='#3493d9' size={55} />
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </>
+            <OutsideClick action={handleToggleClick}>
+                <div className="form-outer">
+                    <h2 className="header"> {!timer ? 'Create a Timer' : 'Edit Timer Name'}</h2>
+                    <form className="form" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="timerLabel">Timer Name</label>
+                            <input
+                                maxLength='13'
+                                type='text'
+                                id='timerLabel'
+                                className='input'
+                                autoComplete='off'
+                                onChange={(e) => setName(e.target.value)}
+                                required />
+                        </div>
+                        <button className="cursor">Submit</button>
+
+                    </form>
+                </div>
+            </OutsideClick>
+        </div>
     );
 }
 

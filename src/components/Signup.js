@@ -47,22 +47,24 @@ const SignUp = () => {
     }
 
     return (
-        <div className="center column">
-            <h1>Sign Up</h1>
-            {error && <h1>{error}</h1>}
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="fname">First Name</label>
-                <input type="text" ref={fnameRef}></input>
-                <label htmlFor="lname">Last Name</label>
-                <input type="text" ref={lnameRef}></input>
-                <label>Email</label>
-                <input type="email" ref={emailRef}></input>
-                <label>Password</label>
-                <input type="password" ref={passwordRef}></input>
-                <label>Password Confirmation</label>
-                <input type="password" ref={passwordConfirmRef}></input>
-                <button disabled={loading}>Sign up</button>
-                <label>Already have an account? <Link to="/login"> Log In </Link></label>
+        <div className="auth-form-outer">
+            <h2 className="header">Create an Account</h2>
+            <form className="form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="fname">First Name</label>
+                    <input type="text" ref={fnameRef} className="input"></input>
+                    <label htmlFor="lname">Last Name</label>
+                    <input type="text" ref={lnameRef} className="input"></input>
+                    <label>Email</label>
+                    <input type="email" ref={emailRef} className="input"></input>
+                    <label>Password</label>
+                    <input type="password" ref={passwordRef} className="input"></input>
+                    <label>Password Confirmation</label>
+                    <input type="password" ref={passwordConfirmRef} className="input"></input>
+                </div>
+                {error && <h1 className="text-center">{error}</h1>}
+                <button className="cursor" disabled={loading}>Sign up</button>
+                <label className="login-label">Already have an account? <Link to="/login"> Log In </Link></label>
             </form>
         </div>
     );
