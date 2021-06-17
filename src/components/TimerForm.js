@@ -46,7 +46,7 @@ const TimerForm = ({ handleToggleClick, timer }) => {
                                 onChange={(e) => setName(e.target.value)}
                                 required />
                         </div>
-                        <button className="cursor">Submit</button>
+                        <button className="btn  cursor">Submit</button>
 
                     </form>
                 </div>

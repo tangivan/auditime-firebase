@@ -9,6 +9,7 @@ import AuthProvider from './contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 import ForgotPassword from './components/ForgotPassword';
 import UpdateProfile from './components/UpdateProfile';
+import LinkAccount from './components/LinkAccount';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/signup" component={SignUp} />
             <Route path="/login" component={Login} />
             <Route path="/forgot-password" component={ForgotPassword} />
+            <Route path="/link-account" component={LinkAccount} />
           </Switch>
         </AuthProvider>
       </Router>

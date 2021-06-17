@@ -30,6 +30,7 @@ body {
   line-height: 1.7;
   color: #777;
   box-sizing: border-box;
+  padding-top: 65px;
 }
 
 code {
@@ -172,7 +173,6 @@ li.nav-item{
 .timerlist {
   width: 100%;
   height: 100%;
-  margin-top: 6rem;
   padding-top: 1.5rem;
   background: var(--primary);
   
@@ -307,6 +307,7 @@ li.nav-item{
   width: 100%;
   margin-top: 1rem;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .timerTable {
@@ -404,6 +405,8 @@ li.nav-item{
 }
 
 .form-group {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 10px;
 	padding-bottom: 20px;
 	position: relative;
@@ -460,21 +463,27 @@ li.nav-item{
 
 .form-group input:focus {
   outline: 0;
-	border-color: #777;
+	border-color: var(--secondary);
 }
 
 .form button {
-  background-color: #365fc7;
-	border: 2px solid #365fc7;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
 	border-radius: 4px;
-	color: #fff;
-	display: block;
 	font-family: inherit;
 	font-size: 16px;
 	padding: 10px;
 	margin-top: 20px;
 	width: 100%;
   margin-bottom: 1rem;
+}
+
+.btn {
+  color: #fff;
+  background-color: #365fc7;
+	border: 2px solid #365fc7;
 }
 
 .auth-form-outer{
@@ -506,4 +515,31 @@ li.nav-item{
 
 .order {
   order: 99999999;
+}
+
+.chart-container {
+  background-color: #fefefe;
+  margin-top: 1rem;
+  padding: 3rem;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.google-btn {
+  /* padding: 12px 16px 12px 42px; */
+  border: none;
+  border-radius: 3px;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
+
+  color: #757575;
+
+  background-color: white;
+}
+
+.btn-icon {
+  margin-right: auto;
+}
+
+.btn-span {
+  margin-right: auto;
 }

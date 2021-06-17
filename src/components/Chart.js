@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Bar, Doughnut } from 'react-chartjs-2';
+import { Bar, defaults } from 'react-chartjs-2';
 import firebase from '../firebase'
-import { formatNumber } from '../utilities/dataFormatter';
+import { formatNumberInMins } from '../utilities/dataFormatter';
 import { useAuth } from '../contexts/AuthContext'
+
+defaults.plugins.legend.display = false;
 
 const Chart = () => {
     const [timerList, setTimerList] = useState([]);
@@ -26,6 +28,7 @@ const Chart = () => {
         ]
     });
 
+
     useEffect(() => {
         const unsubscribe = firebase
             .firestore()
@@ -48,7 +51,7 @@ const Chart = () => {
 
         timerList.map((timer) => {
             labels = labels.concat(timer.name)
-            data = data.concat(formatNumber(timer.timeRunTotal))
+            data = data.concat(formatNumberInMins(timer.timeRunTotal))
         })
 
         console.log(labels);
@@ -73,23 +76,27 @@ const Chart = () => {
         })
     }, [timerList])
 
-
-
-
     return (
-        <div className='row center'>
-            {/* <Doughnut
-                data={chartData}
-                width={650}
-                height={350}
-                options={{ maintainAspectRatio: false, responsive: false, legend: { display: true, position: 'bottom' } }}
-            /> */}
+        <div className='chart-container row center margin-r-sm'>
             <div>
+                <h1>Hours Spent on Activities</h1>
                 <Bar
                     data={chartData}
                     width={1300}
                     height={350}
-                    options={{ maintainAspectRatio: false, responsive: false }}
+                    options={{
+                        maintainAspectRatio: false,
+                        responsive: false,
+                        scales: {
+                            yAxes: [
+                                {
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            ]
+                        }
+                    }}
                 />
             </div>
         </div>

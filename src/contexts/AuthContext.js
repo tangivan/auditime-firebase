@@ -1,6 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import firebase, { auth, googleProvider } from '../firebase'
-
+import firebase, { auth, githubProvider, googleProvider, facebookProvider, twitterProvider } from '../firebase'
 
 const AuthContext = React.createContext();
 
@@ -26,9 +25,8 @@ const AuthProvider = ({ children }) => {
 
     const linkWithGoogle = () => {
         auth.currentUser.linkWithPopup(googleProvider)
-            .then((result) => {
-                const credential = result.credential;
-                const user = result.user;
+            .then(() => {
+                window.location.reload(false);
             })
             .catch(error => {
                 console.error(error);
@@ -81,7 +79,7 @@ const AuthProvider = ({ children }) => {
         getUuid,
         updateName,
         anonLogin,
-        linkWithGoogle
+        linkWithGoogle,
     }
     return (
         <AuthContext.Provider value={value}>

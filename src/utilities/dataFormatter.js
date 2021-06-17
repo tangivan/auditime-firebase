@@ -23,5 +23,9 @@ export const FormatDuration = (timerTime, type) => {
 }
 
 export const formatNumber = (time) => {
-    return Math.floor(time / 1000)
+    return Math.floor(time / 1000);
+}
+
+export const formatNumberInMins = (time) => {
+    return (Math.floor(time / 1000) / 3600);
 }

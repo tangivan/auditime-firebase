@@ -8,7 +8,7 @@ import { MdExpandMore } from 'react-icons/md';
 const Navbar = () => {
     const history = useHistory();
     const location = useLocation();
-    const { currentUser, logout, linkWithGoogle } = useAuth();
+    const { currentUser, logout } = useAuth();
     const [error, setError] = useState("");
     const [dropdown, setDropdown] = useState(false);
     const [active, setActive] = useState(true);
@@ -18,11 +18,6 @@ const Navbar = () => {
         location.pathname === '/' ? setActive(true) : setActive(false);
         console.log(currentUser);
     }, [location]);
-
-    useEffect(() => {
-        history.push("/");
-        console.log("changed");
-    }, [currentUser.isAnonymous]);
 
     const timers = () => {
         setDropdown(false);
@@ -58,18 +53,23 @@ const Navbar = () => {
     }
 
     const linkAccount = () => {
-        setError('');
-        try {
-            linkWithGoogle();
-        } catch (error) {
-            setError('Failed to Link Account');
-            console.log(error);
-        }
-        finally {
-            setDropdown(false);
-            history.push('/');
-        }
+        history.push("/link-account");
     }
+
+    // const linkAccount = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         setError('');
+    //         await linkWithGoogle();
+    //     } catch (error) {
+    //         setError('Failed to Link Account');
+    //         console.log(error);
+    //     }
+    //     finally {
+    //         setDropdown(false);
+    //         history.push('');
+    //     }
+    // }
 
     return (
         <div className="layout">
