@@ -35,8 +35,10 @@ const ForgotPassword = () => {
                     <input type="email" ref={emailRef} className="input"></input>
                     <button disabled={loading} className="btn cursor">Submit</button>
                 </div>
-                <label>Register for an account! <Link to="/signup">Sign Up </Link></label>
-                <label><Link to="/login">Login</Link></label>
+                <div className="row space-between">
+                    <label>Register for an account! <Link to="/signup">Sign Up </Link></label>
+                    <label><Link to="/login">Login</Link></label>
+                </div>
             </form>
         </div>
     );

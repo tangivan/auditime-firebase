@@ -56,21 +56,6 @@ const Navbar = () => {
         history.push("/link-account");
     }
 
-    // const linkAccount = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         setError('');
-    //         await linkWithGoogle();
-    //     } catch (error) {
-    //         setError('Failed to Link Account');
-    //         console.log(error);
-    //     }
-    //     finally {
-    //         setDropdown(false);
-    //         history.push('');
-    //     }
-    // }
-
     return (
         <div className="layout">
             <nav className="full-height">

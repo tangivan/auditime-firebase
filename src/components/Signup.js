@@ -62,7 +62,7 @@ const SignUp = () => {
                     <label>Password Confirmation</label>
                     <input type="password" ref={passwordConfirmRef} className="input"></input>
                 </div>
-                {error && <h1 className="text-center">{error}</h1>}
+                {error && <h1 className="text-center-red">{error}</h1>}
                 <button className="btn cursor" disabled={loading}>Sign up</button>
                 <label className="login-label">Already have an account? <Link to="/login"> Log In </Link></label>
             </form>

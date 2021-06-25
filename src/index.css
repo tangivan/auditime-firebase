@@ -92,6 +92,10 @@ th, td{
   padding: 0;
 }
 
+.align-right {
+  align-self: flex-end;
+}
+
 .space-around{
   justify-content: space-around;
 }
@@ -110,6 +114,14 @@ th, td{
 
 .cursor{
   cursor:pointer;
+}
+
+.margin-btm-sm {
+  margin-bottom: 1.5rem;
+}
+
+.margin-top-sm {
+  margin-top: 1.rem;
 }
 
 .layout{
@@ -131,9 +143,13 @@ li.nav-item{
   cursor:pointer;
 }
 
-.text-center {
+.text-center-red {
   text-align: center;
   color: red;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .margin-sm {
@@ -404,11 +420,24 @@ li.nav-item{
   padding: 30px 40px;	
 }
 
+.form h2 {
+  width: 100%; 
+  text-align: center; 
+  border-bottom: 1px solid var(--grey); 
+  line-height: 0.1em;
+  margin: 10px 0 20px; 
+}
+
+.form h2 span {
+    background:#fff; 
+    padding:0 10px; 
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 10px;
-	padding-bottom: 20px;
+  margin-bottom: 1px;
+	padding-bottom: 5px;
 	position: relative;
 }
 
@@ -477,7 +506,7 @@ li.nav-item{
 	padding: 10px;
 	margin-top: 20px;
 	width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .btn {
@@ -526,7 +555,6 @@ li.nav-item{
 }
 
 .google-btn {
-  /* padding: 12px 16px 12px 42px; */
   border: none;
   border-radius: 3px;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);

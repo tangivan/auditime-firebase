@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
-import firebase, { auth, githubProvider, googleProvider, facebookProvider, twitterProvider } from '../firebase'
+import { auth, googleProvider } from '../firebase'
+import firebase from 'firebase/app';
+import 'firebase/auth'
 
 const AuthContext = React.createContext();
 
@@ -21,6 +23,31 @@ const AuthProvider = ({ children }) => {
 
     const anonLogin = () => {
         return auth.signInAnonymously();
+    }
+
+    const loginWithGoogle = () => {
+        console.log("loginwithgoogle2")
+        auth.signInWithPopup(googleProvider)
+            .then((result) => {
+                const credential = result.credential;
+                const token = credential.accessToken;
+                const user = result.user;
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }
+
+    const linkEmailandPassword = (email, password, displayName) => {
+        const credential = firebase.auth.EmailAuthProvider.credential(email, password);
+        auth.currentUser.linkWithCredential(credential)
+            .then((usercred) => {
+                const user = usercred.user;
+                console.log("Anonymous account successfully upgraded", user);
+                user.updateProfile({ displayName: displayName });
+            }).catch((error) => {
+                console.log("Error upgrading anonymous account", error);
+            });
     }
 
     const linkWithGoogle = () => {
@@ -79,7 +106,9 @@ const AuthProvider = ({ children }) => {
         getUuid,
         updateName,
         anonLogin,
+        loginWithGoogle,
         linkWithGoogle,
+        linkEmailandPassword
     }
     return (
         <AuthContext.Provider value={value}>
