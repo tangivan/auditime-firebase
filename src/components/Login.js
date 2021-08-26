@@ -14,7 +14,6 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             setError("");
             setLoading(true);
@@ -44,7 +43,6 @@ const Login = () => {
 
     const handleAnonLogin = async (e) => {
         e.preventDefault();
-
         try {
             setError("");
             setLoading(true);
@@ -89,9 +87,9 @@ const Login = () => {
                 </div>
                 <div>
                     <h2><span>Or</span></h2>
-                    <button className="google-btn cursor">
+                    <button className="google-btn cursor" onClick={handleLoginWithGoogle}>
                         <span className="btn-icon"><FcGoogle size={22} /></span>
-                        <span className="btn-span" onClick={handleLoginWithGoogle}>Sign in with Google</span>
+                        <span className="btn-span">Sign in with Google</span>
                     </button>
                 </div>
             </form>

@@ -21,7 +21,6 @@ const LinkAccount = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             setMessage('');
             setError("");
@@ -40,9 +39,11 @@ const LinkAccount = () => {
         e.preventDefault();
         try {
             setError('');
-            await linkWithGoogle();
+            await linkWithGoogle()
+                .then(() => {
+                    history.push('/');
+                })
         } catch (error) {
-            setError('Failed to Link Account');
             console.log(error);
         }
     }
@@ -55,11 +56,11 @@ const LinkAccount = () => {
             <form className="form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Username</label>
-                    <input type="text" ref={userNameRef} className="input"></input>
+                    <input type="text" ref={userNameRef} className="input" required></input>
                     <label>Email</label>
-                    <input type="email" ref={emailRef} className="input"></input>
+                    <input type="email" ref={emailRef} className="input" required></input>
                     <label>Password</label>
-                    <input type="password" ref={passwordRef} className="input"></input>
+                    <input type="password" ref={passwordRef} className="input" required></input>
                     <button disabled={loading} className="cursor btn margin-btm-sm">Submit</button>
                     <div>
                         <h2><span>Or</span></h2>

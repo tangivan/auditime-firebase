@@ -1,7 +1,8 @@
 :root {
   --primary: #84CEEB;
   --secondary: #5680e9;
-  --table-blue: 	#C0C0C0;
+  --table-blue: 	#E4FBFF;
+  --table-sub: #E8F0F2;
   --white: #ffffff;
   --grey: #f5f5f5;
 }
@@ -139,8 +140,24 @@ th, td{
 
 li.nav-item{
   color: #ffff;
-  font-size: 3rem;
+  font-size: 1.5rem;
   cursor:pointer;
+}
+
+@media screen and (min-width: 384px) {
+  li.nav-item {
+    font-size: 2rem;
+  }
+
+  .navtab {
+    margin-left: 3rem;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  li.nav-item {
+    font-size: 3rem;
+  }
 }
 
 .text-center-red {
@@ -172,20 +189,29 @@ li.nav-item{
 
 .nav-item-inactive:hover {
   padding-top: .5rem;
-  border-bottom: .5rem solid #8860D0;
+  border-bottom: .5rem solid #7DEDFF;
 }
 
 .navtab {
-  margin-left: 3rem;
+  margin-left: 1rem;
   cursor: pointer;
   
 }
 
 .logo {
   color: #ffff;
-  font-size: 3rem;
+  font-size: 1.5rem;
 }
-
+@media screen and (min-width: 384px) {
+  .logo {
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 500px) {
+  .logo {
+    font-size: 3rem;
+  }
+}
 .timerlist {
   width: 100%;
   height: 100%;
@@ -306,22 +332,18 @@ li.nav-item{
 }
 
 .timerHistory {
-  background: var(--grey);
+  background: var(--table-sub);
 }
 
 .timerDataTable {
-  min-height: 50%;
-  height: 50%;
   width: 100%;
-  padding: 1rem;
+  padding: 0 1rem;
   border-radius: .25rem;
-  overflow:auto;
+  overflow: auto;
 }
 
 .analyticsContainer {
-  height: 100%;
   width: 100%;
-  margin-top: 1rem;
   overflow-x: hidden;
   overflow-y: hidden;
 }
@@ -515,14 +537,10 @@ li.nav-item{
 	border: 2px solid #365fc7;
 }
 
+
 .auth-form-outer{
-  position: fixed;
-  min-width: 50rem;
-  min-height: 20rem;
-  top: 50%;
-  left: 50%;
-  margin-top: -35rem;
-  margin-left: -25rem;
+  max-width: 50%;
+  margin: auto;
   border: 1px solid var(--secondary);
   border-radius: .25rem;
   background-color: #fefefe;
@@ -530,6 +548,30 @@ li.nav-item{
 
   overflow: hidden;
   z-index: 200;
+}
+
+@media screen and (min-width: 0px) {
+  .auth-form-outer {
+    max-width: 80%;
+  }
+}
+
+@media screen and (min-width: 621px) {
+  .auth-form-outer {
+    max-width: 50%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .auth-form-outer {
+    max-width: 40%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .auth-form-outer {
+    max-width: 30%;
+  }
 }
 
 .auth-form-outer h2 {
@@ -552,6 +594,12 @@ li.nav-item{
   padding: 3rem;
   border-radius: 3px;
   text-align: center;
+  max-width: 95%;
+  width: auto;
+}
+
+.chart {
+  overflow-x: auto;
 }
 
 .google-btn {

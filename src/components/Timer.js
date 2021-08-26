@@ -2,7 +2,6 @@ import React from 'react';
 
 const pi = 3.146
 const radius = 65;
-const stroke_width = 6;
 const circumference = radius * 2 * pi;
 let progress = 0;
 

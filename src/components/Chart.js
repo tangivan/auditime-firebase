@@ -54,9 +54,6 @@ const Chart = () => {
             data = data.concat(formatNumberInMins(timer.timeRunTotal))
         })
 
-        console.log(labels);
-        console.log(data);
-
         setChartData({
             labels: labels,
             datasets: [
@@ -78,7 +75,7 @@ const Chart = () => {
 
     return (
         <div className='chart-container row center margin-r-sm'>
-            <div>
+            <div className="chart">
                 <h1>Hours Spent on Activities</h1>
                 <Bar
                     data={chartData}

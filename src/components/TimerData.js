@@ -20,6 +20,9 @@ const TimerData = () => {
                     ...doc.data(),
                     id: doc.id
                 }))
+                newTimers.sort(function (x, y) {
+                    return x.timerHistory[0].timeStamp - y.timerHistory[0].timeStamp;
+                })
                 setTimerList(newTimers);
             })
         return () => unsubscribe();

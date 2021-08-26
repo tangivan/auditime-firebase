@@ -8,9 +8,9 @@ import OutsideClick from './OutsideClick';
 const TimerForm = ({ handleToggleClick, timer }) => {
     const [name, setName] = useState('');
     const { getUuid } = useAuth();
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(getUuid());
         !timer ? firebase.firestore().collection('users').doc(getUuid()).collection('timers').add({
             name,
             timeShown: 0,
@@ -47,7 +47,6 @@ const TimerForm = ({ handleToggleClick, timer }) => {
                                 required />
                         </div>
                         <button className="btn  cursor">Submit</button>
-
                     </form>
                 </div>
             </OutsideClick>

@@ -21,17 +21,17 @@ function App() {
               <Navbar />
               <TimerList />
             </PrivateRoute>
-            <PrivateRoute path="/analytics">
+            <PrivateRoute path={`${process.env.PUBLIC_URL}/analytics`}>
               <Navbar />
               <Analytics />
             </PrivateRoute>
-            <PrivateRoute path="/update-profile">
+            <PrivateRoute path={`${process.env.PUBLIC_URL}/update-profile`}>
               <UpdateProfile />
             </PrivateRoute>
-            <Route path="/signup" component={SignUp} />
-            <Route path="/login" component={Login} />
-            <Route path="/forgot-password" component={ForgotPassword} />
-            <Route path="/link-account" component={LinkAccount} />
+            <Route path={`${process.env.PUBLIC_URL}/signup`} component={SignUp} />
+            <Route path={`${process.env.PUBLIC_URL}/login`} component={Login} />
+            <Route path={`${process.env.PUBLIC_URL}/forgot-password`} component={ForgotPassword} />
+            <Route path={`${process.env.PUBLIC_URL}/link-account`} component={LinkAccount} />
           </Switch>
         </AuthProvider>
       </Router>

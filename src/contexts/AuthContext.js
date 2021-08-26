@@ -26,7 +26,6 @@ const AuthProvider = ({ children }) => {
     }
 
     const loginWithGoogle = () => {
-        console.log("loginwithgoogle2")
         auth.signInWithPopup(googleProvider)
             .then((result) => {
                 const credential = result.credential;

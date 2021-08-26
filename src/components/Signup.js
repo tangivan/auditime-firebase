@@ -25,7 +25,6 @@ const SignUp = () => {
             setError("");
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value).then(cred => {
-                console.log(cred);
                 updateName(cred.user, fnameRef.current.value, lnameRef.current.value);
                 return firebase.firestore().collection('users').doc(cred.user.uid).collection('timers').add({
                     name: "Default Timer",
@@ -39,7 +38,6 @@ const SignUp = () => {
                 })
             })
         } catch (error) {
-            console.log(error);
             setError("Failed to create an account");
         }
         setLoading(false);
