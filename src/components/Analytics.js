@@ -3,7 +3,6 @@ import TimerData from './TimerData';
 import Chart from './Chart';
 
 const Analytics = () => {
-
     return (
         <div className="analyticsContainer column center align-center">
             <TimerData />

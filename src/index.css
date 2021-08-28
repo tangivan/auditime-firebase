@@ -550,6 +550,14 @@ li.nav-item{
   z-index: 200;
 }
 
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 80%;
+}
+
 @media screen and (min-width: 0px) {
   .auth-form-outer {
     max-width: 80%;

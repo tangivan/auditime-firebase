@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { BeatLoader } from 'react-spinners'
 import { useAuth } from '../contexts/AuthContext'
 import firebase from '../firebase'
 import { Link, useHistory } from 'react-router-dom'
@@ -45,26 +46,30 @@ const SignUp = () => {
     }
 
     return (
-        <div className="auth-form-outer">
-            <h2 className="header">Create an Account</h2>
-            <form className="form" onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="fname">First Name</label>
-                    <input type="text" ref={fnameRef} className="input"></input>
-                    <label htmlFor="lname">Last Name</label>
-                    <input type="text" ref={lnameRef} className="input"></input>
-                    <label>Email</label>
-                    <input type="email" ref={emailRef} className="input"></input>
-                    <label>Password</label>
-                    <input type="password" ref={passwordRef} className="input"></input>
-                    <label>Password Confirmation</label>
-                    <input type="password" ref={passwordConfirmRef} className="input"></input>
+        <>
+            {loading ? <div className="loader"><BeatLoader size={60} /></div> :
+                <div className="auth-form-outer">
+                    <h2 className="header">Create an Account</h2>
+                    <form className="form" onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="fname">First Name</label>
+                            <input type="text" ref={fnameRef} className="input"></input>
+                            <label htmlFor="lname">Last Name</label>
+                            <input type="text" ref={lnameRef} className="input"></input>
+                            <label>Email</label>
+                            <input type="email" ref={emailRef} className="input"></input>
+                            <label>Password</label>
+                            <input type="password" ref={passwordRef} className="input"></input>
+                            <label>Password Confirmation</label>
+                            <input type="password" ref={passwordConfirmRef} className="input"></input>
+                        </div>
+                        {error && <h1 className="text-center-red">{error}</h1>}
+                        <button className="btn cursor" disabled={loading}>Sign up</button>
+                        <label className="login-label">Already have an account? <Link to="/login"> Log In </Link></label>
+                    </form>
                 </div>
-                {error && <h1 className="text-center-red">{error}</h1>}
-                <button className="btn cursor" disabled={loading}>Sign up</button>
-                <label className="login-label">Already have an account? <Link to="/login"> Log In </Link></label>
-            </form>
-        </div>
+            }
+        </>
     );
 }
 

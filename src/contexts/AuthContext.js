@@ -33,8 +33,9 @@ const AuthProvider = ({ children }) => {
                 const user = result.user;
             })
             .catch(error => {
-                console.error(error);
+                console.log(error);
             })
+
     }
 
     const linkEmailandPassword = (email, password, displayName) => {
@@ -42,7 +43,6 @@ const AuthProvider = ({ children }) => {
         auth.currentUser.linkWithCredential(credential)
             .then((usercred) => {
                 const user = usercred.user;
-                console.log("Anonymous account successfully upgraded", user);
                 user.updateProfile({ displayName: displayName });
             }).catch((error) => {
                 console.log("Error upgrading anonymous account", error);

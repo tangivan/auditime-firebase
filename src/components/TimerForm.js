@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { MdCancel } from "react-icons/md";
 import firebase from '../firebase';
-import { v4 as uuidv4 } from 'uuid';
 import { useAuth } from '../contexts/AuthContext';
 import OutsideClick from './OutsideClick';
 

@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import { BeatLoader } from 'react-spinners'
 import { useAuth } from '../contexts/AuthContext'
 import firebase from '../firebase'
 import { Link, useHistory } from 'react-router-dom'
@@ -7,10 +8,17 @@ import { FcGoogle } from 'react-icons/fc'
 const Login = () => {
     const emailRef = useRef();
     const passwordRef = useRef();
-    const { login, anonLogin, loginWithGoogle } = useAuth();
+    const { login, anonLogin, loginWithGoogle, currentUser } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const history = useHistory();
+
+    useEffect(() => {
+        if (currentUser !== null) {
+            setLoading(false);
+            history.push("/");
+        }
+    }, [currentUser]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,24 +29,18 @@ const Login = () => {
         } catch {
             setError("Failed to log in");
         }
-
-        setLoading(false);
-        history.push("/");
     }
 
     const handleLoginWithGoogle = async (e) => {
         e.preventDefault();
-        console.log("google login")
         try {
             setError("");
             setLoading(true);
             await loginWithGoogle();
+
         } catch {
             setError("Failed to log in");
         }
-
-        setLoading(false);
-        history.push("/");
     }
 
     const handleAnonLogin = async (e) => {
@@ -63,37 +65,40 @@ const Login = () => {
             console.log(error);
             setError("Failed to login anonymously.");
         }
-        history.push("/");
-        setLoading(false);
     }
 
     return (
-        <div className="auth-form-outer">
-            <h2 className="header">Log In</h2>
-            {error && <h1>{error}</h1>}
-            <form className="form">
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" ref={emailRef} className="input"></input>
-                    <label>Password</label>
-                    <input type="password" ref={passwordRef} className="input"></input>
-                    {error && <h1>{error}</h1>}
-                    <button disabled={loading} className="btn cursor" onClick={handleSubmit}>Sign In</button>
-                    <button className="btn  cursor" onClick={handleAnonLogin}> Continue as Guest</button>
+        <>
+            {loading ? <div className="loader"><BeatLoader size={60} /></div> :
+                <div className="auth-form-outer">
+                    <h2 className="header">Log In</h2>
+                    <form className="form">
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input type="email" ref={emailRef} className="input"></input>
+                            <label>Password</label>
+                            <input type="password" ref={passwordRef} className="input"></input>
+                            {error && <h1>{error}</h1>}
+                            <button disabled={loading} className="btn cursor" onClick={handleSubmit}>Sign In</button>
+                            <button className="btn  cursor" onClick={handleAnonLogin}> Continue as Guest</button>
+                        </div>
+                        <div className="row space-between margin-btm-sm">
+                            <label>Register for an account! <Link to="/signup">Sign Up </Link></label>
+                            <Link to="/forgot-password">Forgot Password?</Link>
+                        </div>
+                        <div>
+                            <h2><span>Or</span></h2>
+                            <button className="google-btn cursor" onClick={handleLoginWithGoogle}>
+                                <span className="btn-icon"><FcGoogle size={22} /></span>
+                                <span className="btn-span">Sign in with Google</span>
+                            </button>
+                        </div>
+
+                    </form>
+
                 </div>
-                <div className="row space-between margin-btm-sm">
-                    <label>Register for an account! <Link to="/signup">Sign Up </Link></label>
-                    <Link to="/forgot-password">Forgot Password?</Link>
-                </div>
-                <div>
-                    <h2><span>Or</span></h2>
-                    <button className="google-btn cursor" onClick={handleLoginWithGoogle}>
-                        <span className="btn-icon"><FcGoogle size={22} /></span>
-                        <span className="btn-span">Sign in with Google</span>
-                    </button>
-                </div>
-            </form>
-        </div>
+            }
+        </>
     );
 }
 

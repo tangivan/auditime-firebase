@@ -3,12 +3,14 @@ import { Bar, defaults } from 'react-chartjs-2';
 import firebase from '../firebase'
 import { formatNumberInMins } from '../utilities/dataFormatter';
 import { useAuth } from '../contexts/AuthContext'
+import { BeatLoader } from 'react-spinners'
 
 defaults.plugins.legend.display = false;
 
 const Chart = () => {
     const [timerList, setTimerList] = useState([]);
     const { getUuid } = useAuth();
+    const [loading, setLoading] = useState(false);
     const [chartData, setChartData] = useState({
         labels: [],
         datasets: [
@@ -30,6 +32,7 @@ const Chart = () => {
 
 
     useEffect(() => {
+        setLoading(true);
         const unsubscribe = firebase
             .firestore()
             .collection('users')
@@ -41,6 +44,7 @@ const Chart = () => {
                     id: doc.id
                 }))
                 setTimerList(newTimers);
+                setLoading(false);
             })
         return () => unsubscribe();
     }, [])
@@ -74,29 +78,33 @@ const Chart = () => {
     }, [timerList])
 
     return (
-        <div className='chart-container row center margin-r-sm'>
-            <div className="chart">
-                <h1>Hours Spent on Activities</h1>
-                <Bar
-                    data={chartData}
-                    width={1300}
-                    height={350}
-                    options={{
-                        maintainAspectRatio: false,
-                        responsive: false,
-                        scales: {
-                            yAxes: [
-                                {
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
+        <>
+            {loading ? <div className="loader"><BeatLoader size={60} /></div> :
+                <div className='chart-container row center margin-r-sm'>
+                    <div className="chart">
+                        <h1>Hours Spent on Activities</h1>
+                        <Bar
+                            data={chartData}
+                            width={1300}
+                            height={350}
+                            options={{
+                                maintainAspectRatio: false,
+                                responsive: false,
+                                scales: {
+                                    yAxes: [
+                                        {
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    ]
                                 }
-                            ]
-                        }
-                    }}
-                />
-            </div>
-        </div>
+                            }}
+                        />
+                    </div>
+                </div>
+            }
+        </>
     );
 }
 
