@@ -35,11 +35,10 @@ const Login = () => {
         e.preventDefault();
         try {
             setError("");
-            setLoading(true);
             await loginWithGoogle();
-
-        } catch {
+        } catch (error) {
             setError("Failed to log in");
+            alert(error.message);
         }
     }
 
