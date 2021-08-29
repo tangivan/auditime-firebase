@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { BeatLoader } from 'react-spinners'
 import { useAuth } from '../contexts/AuthContext'
 import firebase from '../firebase'
@@ -10,10 +10,17 @@ const SignUp = () => {
     const fnameRef = useRef();
     const lnameRef = useRef();
     const passwordConfirmRef = useRef();
-    const { signup, updateName } = useAuth();
+    const { signup, updateName, currentUser } = useAuth();
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const history = useHistory();
+
+    useEffect(() => {
+        if (currentUser !== null) {
+            setLoading(false);
+            history.push("/");
+        }
+    }, [currentUser]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -24,7 +31,6 @@ const SignUp = () => {
 
         try {
             setError("");
-            setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value).then(cred => {
                 updateName(cred.user, fnameRef.current.value, lnameRef.current.value);
                 return firebase.firestore().collection('users').doc(cred.user.uid).collection('timers').add({
@@ -38,11 +44,11 @@ const SignUp = () => {
                     }],
                 })
             })
+            setLoading(true);
         } catch (error) {
             setError("Failed to create an account");
         }
         setLoading(false);
-        history.push('/');
     }
 
     return (
@@ -53,15 +59,15 @@ const SignUp = () => {
                     <form className="form" onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="fname">First Name</label>
-                            <input type="text" ref={fnameRef} className="input"></input>
+                            <input type="text" ref={fnameRef} className="input" required></input>
                             <label htmlFor="lname">Last Name</label>
-                            <input type="text" ref={lnameRef} className="input"></input>
+                            <input type="text" ref={lnameRef} className="input" required></input>
                             <label>Email</label>
-                            <input type="email" ref={emailRef} className="input"></input>
+                            <input type="email" ref={emailRef} className="input" required></input>
                             <label>Password</label>
-                            <input type="password" ref={passwordRef} className="input"></input>
+                            <input type="password" ref={passwordRef} className="input" required></input>
                             <label>Password Confirmation</label>
-                            <input type="password" ref={passwordConfirmRef} className="input"></input>
+                            <input type="password" ref={passwordConfirmRef} className="input" required></input>
                         </div>
                         {error && <h1 className="text-center-red">{error}</h1>}
                         <button className="btn cursor" disabled={loading}>Sign up</button>

@@ -76,6 +76,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const updateName = (user, fname, lname) => {
+        console.log("this method was fired");
         return user.updateProfile({
             displayName: fname + ' ' + lname
         }).then(console.log("succeed"));

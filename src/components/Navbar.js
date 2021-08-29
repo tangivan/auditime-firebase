@@ -11,6 +11,7 @@ const Navbar = () => {
     const { currentUser, logout } = useAuth();
     const [error, setError] = useState("");
     const [dropdown, setDropdown] = useState(false);
+    const [displayName, setDisplayName] = useState("")
     const [active, setActive] = useState(true);
 
 
@@ -18,6 +19,18 @@ const Navbar = () => {
         location.pathname === '/' ? setActive(true) : setActive(false);
         console.log(currentUser);
     }, [location]);
+
+    useEffect(() => {
+        if (typeof currentUser.providerData[0] !== 'undefined') {
+            if (currentUser.providerData[0].displayName !== displayName) {
+                if (currentUser.providerData[0].displayName !== null) {
+                    setDisplayName(currentUser.providerData[0].displayName.split(" ").map((n) => n[0]).join('').toUpperCase());
+                }
+                else
+                    setDisplayName("G");
+            }
+        }
+    }, [currentUser]);
 
     const timers = () => {
         setDropdown(false);
@@ -72,7 +85,7 @@ const Navbar = () => {
                     <OutsideClick action={handleOutsideToggle}>
                         <div className="dropdown">
                             <li className="dropdown-btn row end" onClick={handleToggle}>
-                                <span className="circle initials">{!currentUser.isAnonymous ? currentUser.providerData[0].displayName.split(" ").map((n) => n[0]).join('').toUpperCase() : "G"}</span>
+                                <span className="circle initials">{!currentUser.isAnonymous ? displayName : "G"}</span>
                                 <MdExpandMore size={20} className={dropdown ? "expand expand-arrow-up" : "expand expand-arrow-down"} />
                             </li>
                             {dropdown && <div className="dropdown-content">

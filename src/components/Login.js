@@ -24,8 +24,8 @@ const Login = () => {
         e.preventDefault();
         try {
             setError("");
-            setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
+            setLoading(true);
         } catch {
             setError("Failed to log in");
         }
@@ -75,10 +75,10 @@ const Login = () => {
                     <form className="form">
                         <div className="form-group">
                             <label>Email</label>
-                            <input type="email" ref={emailRef} className="input"></input>
+                            <input type="email" ref={emailRef} className="input" required></input>
                             <label>Password</label>
-                            <input type="password" ref={passwordRef} className="input"></input>
-                            {error && <h1>{error}</h1>}
+                            <input type="password" ref={passwordRef} className="input" required></input>
+                            {error && <h1 className="text-center-red">{error}</h1>}
                             <button disabled={loading} className="btn cursor" onClick={handleSubmit}>Sign In</button>
                             <button className="btn  cursor" onClick={handleAnonLogin}> Continue as Guest</button>
                         </div>

@@ -27,7 +27,6 @@ const ForgotPassword = () => {
     return (
         <div className="auth-form-outer">
             <h2 className="header">Reset Password</h2>
-            {error && <h1>{error}</h1>}
             <h1>{message}</h1>
             <form className="form" onSubmit={handleSubmit}>
                 <div className="form-group">
@@ -35,6 +34,7 @@ const ForgotPassword = () => {
                     <input type="email" ref={emailRef} className="input"></input>
                     <button disabled={loading} className="btn cursor">Submit</button>
                 </div>
+                {error && <h1 className="text-center-red">{error}</h1>}
                 <div className="row space-between">
                     <label>Register for an account! <Link to="/signup">Sign Up </Link></label>
                     <label><Link to="/login">Login</Link></label>
