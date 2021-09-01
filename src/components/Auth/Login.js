@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { BeatLoader } from 'react-spinners'
-import { useAuth } from '../contexts/AuthContext'
-import firebase from '../firebase'
+import { useAuth } from '../../contexts/AuthContext'
+import firebase from '../../firebase'
 import { Link, useHistory } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Bar, defaults } from 'react-chartjs-2';
-import firebase from '../firebase'
-import { formatNumberInMins } from '../utilities/dataFormatter';
-import { useAuth } from '../contexts/AuthContext'
+import firebase from '../../firebase'
+import { formatNumberInMins } from '../../utilities/dataFormatter';
+import { useAuth } from '../../contexts/AuthContext';
 import { BeatLoader } from 'react-spinners'
 
 defaults.plugins.legend.display = false;

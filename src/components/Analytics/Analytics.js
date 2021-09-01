@@ -1,5 +1,5 @@
 import React from 'react';
-import TimerData from './TimerData';
+import TimerData from '../Timer/TimerData';
 import Chart from './Chart';
 
 const Analytics = () => {

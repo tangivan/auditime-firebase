@@ -1,15 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import Analytics from './components/Analytics';
-import TimerList from './components/TimerList';
-import Navbar from './components/Navbar';
-import SignUp from './components/Signup';
-import Login from './components/Login';
+import Analytics from './components/Analytics/Analytics';
+import TimerList from './components/Timer/TimerList';
+import Navbar from './components/Navbar/Navbar';
+import SignUp from './components/Auth/Signup';
+import Login from './components/Auth/Login';
 import AuthProvider from './contexts/AuthContext';
-import PrivateRoute from './components/PrivateRoute';
-import ForgotPassword from './components/ForgotPassword';
-import UpdateProfile from './components/UpdateProfile';
-import LinkAccount from './components/LinkAccount';
+import PrivateRoute from './components/Auth/PrivateRoute';
+import ForgotPassword from './components/Auth/ForgotPassword';
+import UpdateProfile from './components/Auth/UpdateProfile';
+import LinkAccount from './components/Auth/LinkAccount';
 
 function App() {
   return (

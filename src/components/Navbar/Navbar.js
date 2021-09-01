@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import OutsideClick from './OutsideClick';
+import OutsideClick from '../../utilities/OutsideClick';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { IoIosTimer } from 'react-icons/io';
 import { MdExpandMore } from 'react-icons/md';
 

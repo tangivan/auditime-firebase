@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../../contexts/AuthContext'
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'

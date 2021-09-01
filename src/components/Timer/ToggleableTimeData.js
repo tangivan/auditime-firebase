@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormatDate, FormatDuration } from '../utilities/dataFormatter';
+import { FormatDate, FormatDuration } from '../../utilities/dataFormatter';
 import CollapsibleTimerData from './CollapsibleTimerData';
 
 const ToggleableTimeData = ({ timer }) => {

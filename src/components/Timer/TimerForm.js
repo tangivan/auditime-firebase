@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import firebase from '../firebase';
-import { useAuth } from '../contexts/AuthContext';
-import OutsideClick from './OutsideClick';
+import firebase from '../../firebase';
+import { useAuth } from '../../contexts/AuthContext';
+import OutsideClick from '../../utilities/OutsideClick';
 
 const TimerForm = ({ handleToggleClick, timer }) => {
     const [name, setName] = useState('');

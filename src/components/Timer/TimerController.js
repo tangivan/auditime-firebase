@@ -3,8 +3,8 @@ import { FaPlay, FaPause, FaStop } from 'react-icons/fa'
 import { MdCancel, MdModeEdit } from "react-icons/md";
 import Timer from './Timer';
 import TimerForm from './TimerForm';
-import firebase from '../firebase'
-import { useAuth } from '../contexts/AuthContext'
+import firebase from '../../firebase'
+import { useAuth } from '../../contexts/AuthContext'
 
 const TimerController = ({ timer }) => {
 
