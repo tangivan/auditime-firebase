@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import OutsideClick from '../../utilities/OutsideClick';
+import OutsideClick from '../../hooks/OutsideClick';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { IoIosTimer } from 'react-icons/io';
