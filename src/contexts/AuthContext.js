@@ -3,7 +3,7 @@ import { auth, googleProvider } from '../firebase'
 import firebase from 'firebase/app';
 import 'firebase/auth'
 
-const AuthContext = React.createContext();
+export const AuthContext = React.createContext();
 
 export const useAuth = () => {
     return useContext(AuthContext);

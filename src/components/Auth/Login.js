@@ -48,7 +48,6 @@ const Login = () => {
             setError("");
             setLoading(true);
             await anonLogin().then(cred => {
-                console.log(cred);
                 return firebase.firestore().collection('users').doc(cred.user.uid).collection('timers').add({
                     name: "Default Timer",
                     timeShown: 0,
@@ -61,25 +60,24 @@ const Login = () => {
                 })
             })
         } catch (error) {
-            console.log(error);
             setError("Failed to login anonymously.");
         }
     }
 
     return (
         <>
-            {loading ? <div className="loader"><BeatLoader size={60} /></div> :
-                <div className="auth-form-outer">
+            {loading ? <div data-testid="loader" className="loader"><BeatLoader size={60} /></div> :
+                <div data-testid="header" className="auth-form-outer">
                     <h2 className="header">Log In</h2>
                     <form className="form">
                         <div className="form-group">
-                            <label>Email</label>
-                            <input type="email" ref={emailRef} className="input" required></input>
-                            <label>Password</label>
-                            <input type="password" ref={passwordRef} className="input" required></input>
+                            <label htmlFor="email">Email</label>
+                            <input id="email" type="email" ref={emailRef} className="input" required></input>
+                            <label htmlFor="pass">Password</label>
+                            <input id="pass" type="password" htmlFor="pass" ref={passwordRef} className="input" required></input>
                             {error && <h1 className="text-center-red">{error}</h1>}
-                            <button disabled={loading} className="btn cursor" onClick={handleSubmit}>Sign In</button>
-                            <button className="btn  cursor" onClick={handleAnonLogin}> Continue as Guest</button>
+                            <button data-testid="login" disabled={loading} className="btn cursor" onClick={handleSubmit}>Sign In</button>
+                            <button className="btn cursor" onClick={handleAnonLogin}> Continue as Guest</button>
                         </div>
                         <div className="row space-between margin-btm-sm">
                             <label>Register for an account! <Link to="/signup">Sign Up </Link></label>
@@ -92,9 +90,7 @@ const Login = () => {
                                 <span className="btn-span">Sign in with Google</span>
                             </button>
                         </div>
-
                     </form>
-
                 </div>
             }
         </>
