@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../firebase';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import ToggleableTimeData from './ToggleableTimeData';
 
 const TimerData = () => {

@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { BeatLoader } from 'react-spinners'
-import { useAuth } from '../../contexts/AuthContext'
-import firebase from '../../firebase'
+import { useAuth } from '../../context/AuthContext'
+import { addDefaultTimer } from '../../utils/firebaseHelper'
 import { Link, useHistory } from 'react-router-dom'
 
 const SignUp = () => {
@@ -33,16 +33,7 @@ const SignUp = () => {
             setError("");
             await signup(emailRef.current.value, passwordRef.current.value).then(cred => {
                 updateName(cred.user, fnameRef.current.value, lnameRef.current.value);
-                return firebase.firestore().collection('users').doc(cred.user.uid).collection('timers').add({
-                    name: "Default Timer",
-                    timeShown: 0,
-                    timeRunTotal: 0,
-                    timerHistory: [{
-                        events: 'created',
-                        duration: 0,
-                        timeStamp: Date.now()
-                    }],
-                })
+                addDefaultTimer(cred.user.uid);
             })
             setLoading(true);
         } catch (error) {
@@ -59,15 +50,15 @@ const SignUp = () => {
                     <form className="form" onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="fname">First Name</label>
-                            <input type="text" ref={fnameRef} className="input" required></input>
+                            <input id="fname" type="text" ref={fnameRef} className="input" required></input>
                             <label htmlFor="lname">Last Name</label>
-                            <input type="text" ref={lnameRef} className="input" required></input>
-                            <label>Email</label>
-                            <input type="email" ref={emailRef} className="input" required></input>
-                            <label>Password</label>
-                            <input type="password" ref={passwordRef} className="input" required></input>
-                            <label>Password Confirmation</label>
-                            <input type="password" ref={passwordConfirmRef} className="input" required></input>
+                            <input id="lname" type="text" ref={lnameRef} className="input" required></input>
+                            <label htmlFor="email">Email</label>
+                            <input id="email" type="email" ref={emailRef} className="input" required></input>
+                            <label htmlFor="pass">Password</label>
+                            <input id="pass" type="password" ref={passwordRef} className="input" required></input>
+                            <label htmlFor="passconfirm">Password Confirmation</label>
+                            <input id="passconfirm" type="password" ref={passwordConfirmRef} className="input" required></input>
                         </div>
                         {error && <h1 className="text-center-red">{error}</h1>}
                         <button className="btn cursor" disabled={loading}>Sign up</button>

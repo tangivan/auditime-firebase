@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { BeatLoader } from 'react-spinners'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../context/AuthContext'
+import { addDefaultTimer } from '../../utils/firebaseHelper'
 import firebase from '../../firebase'
 import { Link, useHistory } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
@@ -34,11 +35,10 @@ const Login = () => {
     const handleLoginWithGoogle = async (e) => {
         e.preventDefault();
         try {
-            setError("");
+            setError("You may now sign in from the Google Sign-in Popup.");
             await loginWithGoogle();
         } catch (error) {
             setError("Failed to log in");
-            alert(error.message);
         }
     }
 
@@ -48,16 +48,7 @@ const Login = () => {
             setError("");
             setLoading(true);
             await anonLogin().then(cred => {
-                return firebase.firestore().collection('users').doc(cred.user.uid).collection('timers').add({
-                    name: "Default Timer",
-                    timeShown: 0,
-                    timeRunTotal: 0,
-                    timerHistory: [{
-                        events: 'created',
-                        duration: 0,
-                        timeStamp: Date.now()
-                    }],
-                })
+                addDefaultTimer(cred.user.uid)
             })
         } catch (error) {
             setError("Failed to login anonymously.");

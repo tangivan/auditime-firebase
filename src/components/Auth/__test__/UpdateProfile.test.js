@@ -1,5 +1,5 @@
 import React from "react"
-import Login from "../Login"
+import UpdateProfile from "../UpdateProfile"
 import { AuthContext } from '../../../context/AuthContext';
 import { render, fireEvent, screen } from "@testing-library/react"
 import { BrowserRouter as Router } from "react-router-dom";
@@ -36,58 +36,54 @@ jest.mock('react-router-dom', () => ({
     }),
 }))
 
-const mockAnonLogin = jest.fn(() => {
-    Promise.resolve('Anonymously logged in!')
+const mockUpdateEmail = jest.fn(() => {
+    Promise.resolve('updated Email!')
 });
 
-const mockLoginWithGoogle = jest.fn(() => {
-    Promise.resolve('google popup');
-})
+const mockUpdatePassword = jest.fn(() => {
+    Promise.resolve('updated password!')
+});
+
 
 jest.mock('../../../context/AuthContext', () => ({
     ...jest.requireActual('../../../context/AuthContext'),
     useAuth: () => ({
-        anonLogin: mockAnonLogin,
-        loginWithGoogle: mockLoginWithGoogle
+        updateEmail: mockUpdateEmail,
+        updatePassword: mockUpdatePassword,
+        currentUser: { email: "kldsfls@klsdflsd.com" }
     }),
 }))
 
 let getByLabelText;
 let getByTestId;
 let getByRole;
+let getByText;
 
 beforeEach(() => {
     const component = render(
         <Router>
             <AuthContext.Provider value={{ firebase }}>
-                <Login />
+                <UpdateProfile />
             </AuthContext.Provider>
         </Router>
     );
     getByLabelText = component.getByLabelText;
     getByTestId = component.getByTestId;
     getByRole = component.getByRole;
+    getByText = component.getByText;
 })
 
-describe('<Login />', () => {
+describe('<Signup />', () => {
     test('Form value changes and submit button works', async () => {
         await act(async () => {
-            await fireEvent.change(getByLabelText("Email"), { target: { value: 'ivan@gmail.com' }, });
-            await fireEvent.change(getByLabelText("Password"), { target: { value: 'password' }, });
-            expect(getByLabelText("Email").value).toBe('ivan@gmail.com');
-            expect(getByLabelText("Password").value).toBe('password');
-            fireEvent.click(getByTestId("login"))
-            expect(getByRole('heading', { level: 1 }).textContent).toBe("Failed to log in");
+            await fireEvent.change(getByLabelText("Email"), { target: { value: 'dsfsdf@sdlkflsd.com' }, });
+            await fireEvent.change(getByLabelText("Password"), { target: { value: 'tangers25' }, });
+            await fireEvent.change(getByLabelText("Password Confirmation"), { target: { value: 'tangers256' }, });
+
+            fireEvent.click(getByRole("button", { name: /Update/i }))
+            expect(getByRole('heading', { level: 1 }).textContent).toBe("Passwords do not match");
+            await fireEvent.change(getByLabelText("Password Confirmation"), { target: { value: 'tangers25' }, });
+            fireEvent.click(getByRole("button", { name: /Update/i }))
         });
     });
-
-    test('Google Signin Button calls function', async () => {
-        fireEvent.click(getByRole('button', { name: 'Sign in with Google' }));
-        expect(getByRole('heading', { level: 1 }).textContent).toBe("You may now sign in from the Google Sign-in Popup.");
-    });
-
-    test('Guest Signin Button calls function and shows loader spinner', async () => {
-        fireEvent.click(getByRole('button', { name: 'Continue as Guest' }));
-        expect(getByTestId('loader')).toBeInTheDocument();
-    })
 });

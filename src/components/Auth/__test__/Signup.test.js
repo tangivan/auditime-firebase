@@ -1,5 +1,5 @@
 import React from "react"
-import Login from "../Login"
+import Signup from "../Signup"
 import { AuthContext } from '../../../context/AuthContext';
 import { render, fireEvent, screen } from "@testing-library/react"
 import { BrowserRouter as Router } from "react-router-dom";
@@ -36,58 +36,51 @@ jest.mock('react-router-dom', () => ({
     }),
 }))
 
-const mockAnonLogin = jest.fn(() => {
-    Promise.resolve('Anonymously logged in!')
+const mockSignup = jest.fn(() => {
+    Promise.resolve('signed up!')
 });
 
-const mockLoginWithGoogle = jest.fn(() => {
-    Promise.resolve('google popup');
-})
 
 jest.mock('../../../context/AuthContext', () => ({
     ...jest.requireActual('../../../context/AuthContext'),
     useAuth: () => ({
-        anonLogin: mockAnonLogin,
-        loginWithGoogle: mockLoginWithGoogle
+        signup: mockSignup,
     }),
 }))
 
 let getByLabelText;
 let getByTestId;
 let getByRole;
+let getByText;
 
 beforeEach(() => {
     const component = render(
         <Router>
             <AuthContext.Provider value={{ firebase }}>
-                <Login />
+                <Signup />
             </AuthContext.Provider>
         </Router>
     );
     getByLabelText = component.getByLabelText;
     getByTestId = component.getByTestId;
     getByRole = component.getByRole;
+    getByText = component.getByText;
 })
 
-describe('<Login />', () => {
+describe('<Signup />', () => {
     test('Form value changes and submit button works', async () => {
         await act(async () => {
-            await fireEvent.change(getByLabelText("Email"), { target: { value: 'ivan@gmail.com' }, });
-            await fireEvent.change(getByLabelText("Password"), { target: { value: 'password' }, });
-            expect(getByLabelText("Email").value).toBe('ivan@gmail.com');
-            expect(getByLabelText("Password").value).toBe('password');
-            fireEvent.click(getByTestId("login"))
-            expect(getByRole('heading', { level: 1 }).textContent).toBe("Failed to log in");
+            await fireEvent.change(getByLabelText("First Name"), { target: { value: 'ivan' }, });
+            await fireEvent.change(getByLabelText("Last Name"), { target: { value: 'tang' }, });
+            await fireEvent.change(getByLabelText("Email"), { target: { value: 'ivan@test.com' }, });
+            await fireEvent.change(getByLabelText("Password"), { target: { value: 'tangers25' }, });
+            await fireEvent.change(getByLabelText("Password Confirmation"), { target: { value: 'tangers256' }, });
+
+            fireEvent.click(getByRole("button", { name: /sign up/i }))
+            expect(getByRole('heading', { level: 1 }).textContent).toBe("Passwords do not match");
+            await fireEvent.change(getByLabelText("Password Confirmation"), { target: { value: 'tangers25' }, });
+            fireEvent.click(getByRole("button", { name: /sign up/i }))
+            expect(getByRole('heading', { level: 1 }).textContent).toBe("Failed to create an account");
         });
     });
-
-    test('Google Signin Button calls function', async () => {
-        fireEvent.click(getByRole('button', { name: 'Sign in with Google' }));
-        expect(getByRole('heading', { level: 1 }).textContent).toBe("You may now sign in from the Google Sign-in Popup.");
-    });
-
-    test('Guest Signin Button calls function and shows loader spinner', async () => {
-        fireEvent.click(getByRole('button', { name: 'Continue as Guest' }));
-        expect(getByTestId('loader')).toBeInTheDocument();
-    })
 });

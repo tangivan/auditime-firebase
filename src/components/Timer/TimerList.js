@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { BeatLoader } from 'react-spinners'
 import TimerController from "./TimerController";
 import firebase from '../../firebase'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 
 const TimerList = () => {
     const [timerList, setTimerList] = useState([]);

@@ -44,6 +44,7 @@ const AuthProvider = ({ children }) => {
             .then((usercred) => {
                 const user = usercred.user;
                 user.updateProfile({ displayName: displayName });
+                return usercred;
             }).catch((error) => {
                 console.log("Error upgrading anonymous account", error);
             });
@@ -56,6 +57,7 @@ const AuthProvider = ({ children }) => {
             })
             .catch(error => {
                 console.error(error);
+                return error;
             })
     }
 

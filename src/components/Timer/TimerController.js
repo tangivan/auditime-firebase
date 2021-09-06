@@ -4,7 +4,7 @@ import { MdCancel, MdModeEdit } from "react-icons/md";
 import Timer from './Timer';
 import TimerForm from './TimerForm';
 import firebase from '../../firebase'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 
 const TimerController = ({ timer }) => {
 
