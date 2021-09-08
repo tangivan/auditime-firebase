@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import firebase from '../firebase'
 
@@ -9,12 +9,13 @@ const useFetch = () => {
         timerList: []
     });
     const { getUuid } = useAuth();
-
+    const uuid = getUuid();
+    // eslint-disable-next-line
     useEffect(() => {
-        const unsubscribe = firebase
+        firebase
             .firestore()
             .collection('users')
-            .doc(getUuid())
+            .doc(uuid)
             .collection('timers')
             .onSnapshot((snapshot) => {
                 const newTimers = snapshot.docs.map((doc) => ({
@@ -30,8 +31,7 @@ const useFetch = () => {
                     timerList: newTimers
                 })
             })
-        return () => unsubscribe();
-    }, [])
+    }, [uuid])
     return timerData;
 }
 

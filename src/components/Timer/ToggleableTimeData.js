@@ -13,7 +13,7 @@ const ToggleableTimeData = ({ timer }) => {
         <React.Fragment>
             <tbody role="rowgroup" onClick={handleToggle}>
                 <tr>
-                    <td >{timer.name}</td>
+                    <td datatest-id>{timer.name}</td>
                     <td>{timer.timerHistory[0].events}</td>
                     <td>{FormatDate(timer.timerHistory[0].timeStamp, 'date')}</td>
                     <td>{FormatDate(timer.timerHistory[0].timeStamp, 'time')}</td>
