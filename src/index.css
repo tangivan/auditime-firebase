@@ -74,6 +74,9 @@ th, td{
   text-align: left;
 }
 
+.clickable {
+  cursor: pointer;
+}
 .row {
   display: flex;
   flex-direction: row;
