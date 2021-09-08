@@ -26,16 +26,16 @@ const mockTime2 = {
 
 describe('<Timer />', () => {
     test('renders Timer with a correct formatted timer', async () => {
-        const { getByRole, getByLabelText, getByTestId } = render(
+        const { getByText } = render(
             <Timer time={mockTime1} />
         );
-        expect(getByTestId("time").textContent).toBe("0 : 0 : 0");
+        expect(getByText("0 : 0 : 0")).toBeTruthy();
     });
 
     test('renders Timer with "01:02:03"', async () => {
-        const { getByRole, getByLabelText, getByTestId } = render(
+        const { getByText } = render(
             <Timer time={mockTime2} />
         );
-        expect(getByTestId("time").textContent).toBe("01 : 02 : 03");
+        expect(getByText("01 : 02 : 03")).toBeTruthy();
     });
 });

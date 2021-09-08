@@ -44,6 +44,5 @@ describe('<Chart />', () => {
         const { getByText } = render(
             <Chart />
         );
-        screen.debug();
     });
 });
