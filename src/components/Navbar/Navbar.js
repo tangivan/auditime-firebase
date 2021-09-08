@@ -17,7 +17,6 @@ const Navbar = () => {
 
     useEffect(() => {
         location.pathname === '/' ? setActive(true) : setActive(false);
-        console.log(currentUser);
     }, [location]);
 
     useEffect(() => {
@@ -57,7 +56,6 @@ const Navbar = () => {
             history.push('/login')
         } catch (error) {
             setError('Failed to log out');
-            console.log(error);
         }
     }
 
@@ -84,13 +82,13 @@ const Navbar = () => {
                     </div>
                     <OutsideClick action={handleOutsideToggle}>
                         <div className="dropdown">
-                            <li className="dropdown-btn row end" onClick={handleToggle}>
+                            <li data-testid="dropdown" className="dropdown-btn row end" onClick={handleToggle}>
                                 <span className="circle initials">{!currentUser.isAnonymous ? displayName : "G"}</span>
                                 <MdExpandMore size={20} className={dropdown ? "expand expand-arrow-up" : "expand expand-arrow-down"} />
                             </li>
-                            {dropdown && <div className="dropdown-content">
+                            {dropdown && <div data-testid="dropdown-content" className="dropdown-content">
                                 <li className="dropdown-profile"><span className="margin-sm">{!currentUser.isAnonymous ? currentUser.providerData[0].displayName : "Guest"}</span></li>
-                                {!currentUser.isAnonymous ? <li className="nav-item" onClick={updateProfile}><span className="margin-sm"> Update Profile</span></li> :
+                                {!currentUser.isAnonymous ? <li data-testid="updateProfile" className="nav-item" onClick={updateProfile}><span className="margin-sm"> Update Profile</span></li> :
                                     <li className="nav-item" onClick={linkAccount}><span className="margin-sm"> Link Account</span></li>}
                                 <li className="nav-item" onClick={handleLogout}><span className="margin-sm"> LogOut</span></li>
                             </div>}

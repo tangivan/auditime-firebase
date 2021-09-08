@@ -7,7 +7,7 @@ const CollapsibleTimerData = ({ timer }) => {
         <tbody>
             {timer.timerHistory.slice(1).map(timerHistoryData => {
                 return (
-                    <tr className="timerHistory" key={uuidv4()}>
+                    <tr data-testid="collapse-data" className="timerHistory" key={uuidv4()}>
                         <td></td>
                         <td>{timerHistoryData.events}</td>
                         <td>{FormatDate(timerHistoryData.timeStamp, 'date')}</td>
