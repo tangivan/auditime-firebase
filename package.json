@@ -67,5 +67,9 @@
       "html",
       "text"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "^8.0.1",
+    "cypress": "^8.3.1"
   }
 }
