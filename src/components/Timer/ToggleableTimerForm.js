@@ -10,7 +10,7 @@ const ToggleableTimerForm = () => {
     }
     return (
         <div className="row center align-center">
-            <button className="add-btn hover-scale cursor"
+            <button data-testid="addBtn" className="add-btn hover-scale cursor"
                 onClick={handleToggleClick}
             >
                 <IoIosAddCircleOutline size={70} color="#99cff7" />

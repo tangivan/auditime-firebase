@@ -63,9 +63,9 @@ const LinkAccount = () => {
                     <label htmlFor="email">Email</label>
                     <input id="email" type="email" ref={emailRef} className="input" required></input>
                     <label htmlFor="pass">Password</label>
-                    <input id="pass" type="password" ref={passwordRef} className="input" required></input>
+                    <input data-testid="pass" id="pass" type="password" ref={passwordRef} className="input" required></input>
                     <label htmlFor="passconfirm">Password Confirmation</label>
-                    <input id="passconfirm" type="password" ref={passwordConfirmRef} className="input" required></input>
+                    <input data-testid="pass-confirm" id="passconfirm" type="password" ref={passwordConfirmRef} className="input" required></input>
                     {error && <h1 className="text-center-red">{error}</h1>}
                     <button disabled={loading} className="cursor btn margin-btm-sm">Submit</button>
                     <div>

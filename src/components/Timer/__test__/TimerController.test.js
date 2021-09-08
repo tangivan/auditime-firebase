@@ -61,25 +61,24 @@ describe('<TimeController />', () => {
     });
 
     test('click start button and click pause button shows correct output', async () => {
-        const { getByTestId, queryByText } = render(
+        const { getByTestId, queryByTestId } = render(
             <TimerController timer={mockTimer} />
         );
-
-        expect(getByTestId("start")).toBeTruthy();
-        expect(queryByText("pause")).toBeFalsy();
-        fireEvent.click(getByTestId("start"));
-        expect(queryByText("start")).toBeFalsy();
-        expect(getByTestId("pause")).toBeTruthy();
+        //clicking start button makes pause button appear and vice-versa
+        expect(getByTestId("start", { exact: false })).toBeTruthy();
+        expect(queryByTestId("pause", { exact: false })).toBeFalsy();
+        fireEvent.click((getByTestId("start", { exact: false })));
+        expect(queryByTestId("start", { exact: false })).toBeFalsy();
+        expect(getByTestId("pause", { exact: false })).toBeTruthy();
     });
 
     test('click on edit and remove buttons', async () => {
-        const { getByTestId } = render(
+        const { getByTestId, queryByTestId } = render(
             <TimerController timer={mockTimer} />
         );
-
         expect(getByTestId("edit")).toBeTruthy();
         fireEvent.click(getByTestId("edit"));
-        expect(getByTestId("remove")).toBeTruthy();
-        fireEvent.click(getByTestId("remove"));
+        expect(getByTestId("remove", { exact: false })).toBeTruthy();
+        fireEvent.click((getByTestId("remove", { exact: false })));
     });
 });

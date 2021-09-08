@@ -5,6 +5,7 @@ import Timer from './Timer';
 import TimerForm from './TimerForm';
 import firebase from '../../firebase'
 import { useAuth } from '../../context/AuthContext'
+import { v4 as uuidv4 } from 'uuid';
 
 const TimerController = ({ timer }) => {
 
@@ -144,7 +145,7 @@ const TimerController = ({ timer }) => {
                 </div>
                 <div className='delete-btn-container'>
                     <button
-                        data-testid="remove"
+                        data-testid={`remove-${uuidv4()}`}
                         className='column align-center delete-timer-btn cursor'
                         onClick={handleRemoveTimer}
                     >
@@ -156,16 +157,16 @@ const TimerController = ({ timer }) => {
 
                 <div className='row end'>
                     {!timerSettings.timerOn &&
-                        (<button data-testid="start" className='time-btn cursor'
+                        (<button data-testid={`start-${uuidv4()}`} className='startBtn time-btn cursor'
                             onClick={handleStart}>
                             <FaPlay color='#DEEDFE' size={20} />
                         </button>)}
-                    {timerSettings.timerOn && (<button data-testid="pause" className='time-btn cursor'
+                    {timerSettings.timerOn && (<button data-testid={`pause-${uuidv4()}`} className='pauseBtn time-btn cursor'
                         onClick={handlePause}>
                         <FaPause color='#DEEDFE' size={20} />
                     </button>)}
 
-                    <button className='time-btn cursor' onClick={handleReset}>
+                    <button data-testid={`reset-${uuidv4()}`} className='resetBtn time-btn cursor' onClick={handleReset}>
                         <FaStop color='#DEEDFE' size={20} />
                     </button>
                 </div>

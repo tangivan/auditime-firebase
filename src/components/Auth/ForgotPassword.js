@@ -36,7 +36,7 @@ const ForgotPassword = () => {
                 {error && <h1 className="text-center-red">{error}</h1>}
                 <div className="row space-between">
                     <label>Register for an account! <Link to="/signup">Sign Up </Link></label>
-                    <label><Link to="/login">Login</Link></label>
+                    <label><Link to="/login">Log In</Link></label>
                 </div>
             </form>
         </div>
