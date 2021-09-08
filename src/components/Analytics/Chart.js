@@ -33,7 +33,7 @@ const Chart = () => {
 
     useEffect(() => {
         setLoading(true);
-        const unsubscribe = firebase
+        firebase
             .firestore()
             .collection('users')
             .doc(getUuid())
@@ -46,7 +46,6 @@ const Chart = () => {
                 setTimerList(newTimers);
                 setLoading(false);
             })
-        return () => unsubscribe();
     }, [])
 
     useEffect(() => {

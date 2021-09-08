@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { BeatLoader } from 'react-spinners';
 import ToggleableTimeData from './ToggleableTimeData';
 import useFetch from '../../hooks/useFetch';
 
 const TimerData = () => {
-    const { error, loading, timerList } = useFetch();
+    const { loading, timerList } = useFetch();
 
     return (
         <>
-            {loading ? <div></div> :
+            {loading ? <div data-testid="loader" className="loader"><BeatLoader size={60} /></div> :
                 <div className="timerDataTable">
                     <table className="timerTable">
                         <tbody>
