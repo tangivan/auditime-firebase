@@ -1,34 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import firebase from '../../firebase';
-import { useAuth } from '../../context/AuthContext';
 import ToggleableTimeData from './ToggleableTimeData';
+import useFetch from '../../hooks/useFetch';
 
 const TimerData = () => {
-    const [timerList, setTimerList] = useState([]);
-    const { getUuid } = useAuth();
-    const [loading, setLoading] = useState(false);
-
-
-    useEffect(() => {
-        setLoading(true);
-        const unsubscribe = firebase
-            .firestore()
-            .collection('users')
-            .doc(getUuid())
-            .collection('timers')
-            .onSnapshot((snapshot) => {
-                const newTimers = snapshot.docs.map((doc) => ({
-                    ...doc.data(),
-                    id: doc.id
-                }))
-                newTimers.sort(function (x, y) {
-                    return x.timerHistory[0].timeStamp - y.timerHistory[0].timeStamp;
-                })
-                setTimerList(newTimers);
-                setLoading(false);
-            })
-        return () => unsubscribe();
-    }, [])
+    const { error, loading, timerList } = useFetch();
 
     return (
         <>
