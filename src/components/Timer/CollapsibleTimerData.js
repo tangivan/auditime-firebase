@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormatDate, FormatDuration } from '../../utilities/dataFormatter';
+import { FormatDate, FormatDuration } from '../../utils/dataFormatter';
 import { v4 as uuidv4 } from 'uuid';
 
 const CollapsibleTimerData = ({ timer }) => {
@@ -7,7 +7,7 @@ const CollapsibleTimerData = ({ timer }) => {
         <tbody>
             {timer.timerHistory.slice(1).map(timerHistoryData => {
                 return (
-                    <tr className="timerHistory" key={uuidv4()}>
+                    <tr data-testid="collapse-data" className="timerHistory" key={uuidv4()}>
                         <td></td>
                         <td>{timerHistoryData.events}</td>
                         <td>{FormatDate(timerHistoryData.timeStamp, 'date')}</td>

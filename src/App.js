@@ -5,7 +5,7 @@ import TimerList from './components/Timer/TimerList';
 import Navbar from './components/Navbar/Navbar';
 import SignUp from './components/Auth/Signup';
 import Login from './components/Auth/Login';
-import AuthProvider from './contexts/AuthContext';
+import AuthProvider from './context/AuthContext';
 import PrivateRoute from './components/Auth/PrivateRoute';
 import ForgotPassword from './components/Auth/ForgotPassword';
 import UpdateProfile from './components/Auth/UpdateProfile';

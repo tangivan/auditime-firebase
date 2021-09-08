@@ -74,6 +74,9 @@ th, td{
   text-align: left;
 }
 
+.clickable {
+  cursor: pointer;
+}
 .row {
   display: flex;
   flex-direction: row;
@@ -165,6 +168,10 @@ li.nav-item{
   color: red;
 }
 
+.text-center-blue {
+  text-align: center;
+  color: blue;
+}
 .text-center {
   text-align: center;
 }

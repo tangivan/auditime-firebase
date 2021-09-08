@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import firebase from '../../firebase';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import OutsideClick from '../../hooks/OutsideClick';
+import { addNewTimer, updateName } from '../../utils/firebaseHelper';
 
 const TimerForm = ({ handleToggleClick, timer }) => {
     const [name, setName] = useState('');
@@ -9,18 +10,9 @@ const TimerForm = ({ handleToggleClick, timer }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        !timer ? firebase.firestore().collection('users').doc(getUuid()).collection('timers').add({
-            name,
-            timeShown: 0,
-            timeRunTotal: 0,
-            timerHistory: [{
-                events: 'created',
-                duration: 0,
-                timeStamp: Date.now()
-            }],
-        })
+        !timer ? addNewTimer(name, getUuid())
             :
-            firebase.firestore().collection('users').doc(getUuid()).collection('timers').doc(timer.id).update({ name });
+            updateName(name, getUuid(), timer.id)
 
         setName('');
         handleToggleClick();

@@ -4,7 +4,7 @@ import { MdCancel, MdModeEdit } from "react-icons/md";
 import Timer from './Timer';
 import TimerForm from './TimerForm';
 import firebase from '../../firebase'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 
 const TimerController = ({ timer }) => {
 
@@ -134,14 +134,18 @@ const TimerController = ({ timer }) => {
             <div className="timer-container column align-center hover-scale">
                 <div className="label-container">
                     <label className='labels'>{timer.name}</label>
-                    <button className='editable-btn cursor'
+                    <button
+                        data-testid="edit"
+                        className='editable-btn cursor'
                         onClick={handleEditTimer}
                     >
                         <MdModeEdit size={20} color="#0755B5" />
                     </button>
                 </div>
                 <div className='delete-btn-container'>
-                    <button className='column align-center delete-timer-btn cursor'
+                    <button
+                        data-testid="remove"
+                        className='column align-center delete-timer-btn cursor'
                         onClick={handleRemoveTimer}
                     >
                         <MdCancel color="#0755B5" size={30} />
@@ -152,11 +156,11 @@ const TimerController = ({ timer }) => {
 
                 <div className='row end'>
                     {!timerSettings.timerOn &&
-                        (<button className='time-btn cursor'
+                        (<button data-testid="start" className='time-btn cursor'
                             onClick={handleStart}>
                             <FaPlay color='#DEEDFE' size={20} />
                         </button>)}
-                    {timerSettings.timerOn && (<button className='time-btn cursor'
+                    {timerSettings.timerOn && (<button data-testid="pause" className='time-btn cursor'
                         onClick={handlePause}>
                         <FaPause color='#DEEDFE' size={20} />
                     </button>)}

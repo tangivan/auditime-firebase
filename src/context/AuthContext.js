@@ -3,7 +3,7 @@ import { auth, googleProvider } from '../firebase'
 import firebase from 'firebase/app';
 import 'firebase/auth'
 
-const AuthContext = React.createContext();
+export const AuthContext = React.createContext();
 
 export const useAuth = () => {
     return useContext(AuthContext);
@@ -44,6 +44,7 @@ const AuthProvider = ({ children }) => {
             .then((usercred) => {
                 const user = usercred.user;
                 user.updateProfile({ displayName: displayName });
+                return usercred;
             }).catch((error) => {
                 console.log("Error upgrading anonymous account", error);
             });
@@ -56,6 +57,7 @@ const AuthProvider = ({ children }) => {
             })
             .catch(error => {
                 console.error(error);
+                return error;
             })
     }
 
