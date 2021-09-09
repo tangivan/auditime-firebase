@@ -17,6 +17,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#tested-with">Tested With</a></li>
       </ul>
     </li>
     <li>
@@ -30,7 +31,7 @@
 </details>
 
 # About The Project
-![auditime-demo](https://github.com/tangivan/auditime-firebase/blob/main/src/media/auditime-github-gif.gif)  
+![auditime-demo](https://github.com/tangivan/auditime-firebase/blob/main/public/media/auditime-github-gif.gif)  
 [Check out the Live Demo!](https://auditime.one)
 <br />
 <br />
@@ -42,6 +43,11 @@ Every user account can save their timers and come back to it whenever they want.
 * [React Hooks](https://reactjs.org/docs/hooks-intro.html)
 * [React Chart.js 2](https://www.npmjs.com/package/react-chartjs-2)
 * [Firebase](https://firebase.google.com/)
+
+### Tested With
+* [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+* [Jest](https://jestjs.io/)
+* [Cypress](https://www.cypress.io/)
 
 # Getting Started
 In order to use this project, you will have to create your own firebase project for the api keys at https://console.firebase.google.com/ and then follow the next few steps.
