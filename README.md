@@ -35,12 +35,12 @@
 [Check out the Live Demo!](https://auditime.one)
 <br />
 <br />
-AudiTime is a web application used to keep track of your time spent in any task. The app is built with React Hooks and uses Firebase for both user authentification and database storage. For users who do not want to create an account, you can start right away with a Guest account and link it to your email if you like it!
+AudiTime is a web application used to keep track of your time spent in any task. The app is built with React and uses Firebase for both user authentification and database storage. For users who do not want to create an account, you can start right away with a Guest account and link it to your email if you like it!
 
 Every user account can save their timers and come back to it whenever they want. The data for the timers are stored in a firebase database and can be viewed in the analytics tab. In the analytics tab, you can also see the breakdown of where most of your time spent through react charts.
 
 ### Built With
-* [React Hooks](https://reactjs.org/docs/hooks-intro.html)
+* [React](https://reactjs.org)
 * [React Chart.js 2](https://www.npmjs.com/package/react-chartjs-2)
 * [Firebase](https://firebase.google.com/)
 
